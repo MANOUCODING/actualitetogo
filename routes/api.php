@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\backoffice\AuthController;
 use App\Http\Controllers\api\frontoffice\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,12 @@ Route::get('/home/footer/tags', [HomeController::class, 'tagsF']);
 Route::post('/newsletter/store', [HomeController::class, 'storeNewsLetter']);
 
 Route::post('/contact/store', [HomeController::class, 'storeSms']);
+
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
+
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::post('me', [AuthController::class, 'me']);
+
+});
