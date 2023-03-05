@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title') {{ $category->nomComplet }} @endsection
 @section('content')
-    <main>
+<main>
         <section class="position-relative">
             <div class="container" data-sticky-container>
                 <div class="row">
@@ -33,7 +33,7 @@
                                             </div>
                                         </div>
                                         <div class="card-body px-0 pt-3">
-                                            <h6 class="card-title"><a href="/{{$result->slug}}" class="btn-link text-reset fw-bold"> {{$result->title}} </a></h6>                                        <!-- Card info -->
+                                            <h6 class="card-title"><a href="/{{$result->slug}}" class="btn-link text-reset fw-bold"> {!! $result->title !!} </a></h6>                                        <!-- Card info -->
                                             <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
                                                 <li class="nav-item">
                                                     <div class="nav-link">
@@ -45,7 +45,7 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li class="nav-item">10/12/2001</li>
+                                                <li class="nav-item">{{ date('d/m/Y', strtotime($result->date_publish)) }}</li>
                                             </ul>
                                         </div>
                                     </div>

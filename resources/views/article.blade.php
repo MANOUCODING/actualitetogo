@@ -26,7 +26,7 @@ Main hero START -->
         <div class="row">
 			<div class="col-12">
                 @foreach ($categories as $category)
-                    <a href="/categories/{{ $category->slug }}" class="badge text-bg-danger mb-2"><i class="fas fa-circle me-2 small fw-bold"></i> {{ $category->name }} </a>
+                    <a href="/{{ $category->slug }}" class="badge text-bg-danger mb-2"><i class="fas fa-circle me-2 small fw-bold"></i> {{ $category->name }} </a>
                 @endforeach
 				<h1> {!! $article->title !!} </h1>
 			</div>
@@ -55,8 +55,8 @@ Main START -->
                     <hr class="d-none d-lg-block">
 					<!-- Card info -->
 					<ul class="list-inline list-unstyled">
-						<li class="list-inline-item d-lg-block my-lg-2">Nov 15, 2022</li>
-						<li class="list-inline-item d-lg-block my-lg-2">5 min de lecture</li>
+						<li class="list-inline-item d-lg-block my-lg-2">{{ date('d/m/Y', strtotime($article->date_publish)) }}</li>
+						
 						<li class="list-inline-item d-lg-block my-lg-2"><a href="#" class="text-body"><i class="far fa-heart me-1"></i></a> {{ $article->likesCount }}</li>
 						<li class="list-inline-item d-lg-block my-lg-2"><i class="far fa-eye me-1"></i> {{ $article->viewsCount}} </li>
 					</ul>
@@ -104,11 +104,11 @@ Main START -->
                     <div class="row g-0">
                         <div class="col-sm-6 bg-primary bg-opacity-10 p-4 position-relative border-end border-1 rounded-start">
                             <span><i class="bi bi-arrow-left me-3 rtl-flip"></i>Article Précedent</span>
-                            <h5 class="m-0"><a href="/articles/{{ $previous->slug}}" class="stretched-link btn-link text-reset"> {!! $previous->title !!} </a></h5>
+                            <h6 class="m-0"><a href="/{{ $previous->slug}}" class="stretched-link btn-link text-reset"> {!! $previous->title !!} </a></h6>
                         </div>
                         <div class="col-sm-6 bg-primary bg-opacity-10 p-4 position-relative text-sm-end rounded-end">
                             <span><i class="bi bi-arrow-right ms-3 rtl-flip"></i>Article Suivant</span>
-                            <h5 class="m-0"><a href="/articles/{{ $next->slug}}" class="stretched-link btn-link text-reset">{!! $next->title !!}</a></h5>
+                            <h6 class="m-0"><a href="/{{ $next->slug}}" class="stretched-link btn-link text-reset">{!! $next->title !!}</a></h6>
                         </div>
                     </div>
                     <!-- Related post START -->
@@ -130,7 +130,7 @@ Main START -->
 							<div class="card">
 								<!-- Card img -->
 								<div class="position-relative">
-									<img class="card-img" src="/storage/{{$similar->ogImage}}" alt="Card image" style="height: 150px; object-fit: cover">
+									<img class="card-img" src="/storage/{{$similar->ogImage}}" alt="Card image" style="height: 220px; object-fit: cover">
 									<div class="card-img-overlay d-flex align-items-start flex-column p-3">
 										
 										<!-- Card overlay bottom -->
@@ -140,11 +140,11 @@ Main START -->
 									</div>
 								</div>
 								<div class="card-body px-0 pt-3">
-									<h6 class="card-title"><a href="/articles/{{ $similar->slug }}" class="btn-link text-reset stretched-link fw-bold"> {!! $similar->title !!} </a></h6>
+									<h6 class="card-title"><a href="/{{ $similar->slug }}" class="btn-link text-reset stretched-link fw-bold"> {!! $similar->title !!} </a></h6>
 									<!-- Card info -->
 									<ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
 										
-										<li class="nav-item">Mar 07, 2022</li>
+										<li class="nav-item">{{ date('d/m/Y', strtotime($similar->date_publish)) }}</li>
 									</ul>
 								</div>
 							</div>

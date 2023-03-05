@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Acceuil || Togo Actualites</title>
+	<title>Erreur 404 || Togo Actualites</title>
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="author" content="Webestica.com">
-	<meta name="description" content="Bootstrap based News, Magazine and Blog Theme">
+	
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="/assets/frontend/images/Icone.png">

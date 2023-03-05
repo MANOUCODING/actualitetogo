@@ -4,6 +4,8 @@ namespace App\Http\Controllers\api\frontoffice;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Models\Article;
+use App\Models\Author;
 use App\Models\Category;
 use App\Models\Message;
 use App\Models\NewsLetter;
@@ -42,31 +44,12 @@ class HomeController extends BaseController
 
     }
 
-    public function homePosts()
-    {
-        return view('welcome');
-
-    }
-
-    public function tags($slug)
-    {
-       
-
-        $author = Tags::where('slug', $slug)->where('visible', 1)->first();
-
-        if ($author == null) {
-
-            return view('layouts.404');
-       
-        } else {
-
-            return view('tags', ['category' => $author]);
-           
-    
-        }
-
-    }
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function category($slug)
     {
 
@@ -96,23 +79,360 @@ class HomeController extends BaseController
 
         }else{
 
-            $author = Category::where('slug', $slug)->where('visible', 1)->first();
+             $author = Category::where('slug', $slug)->where('visible', 1)->first();
 
+        $article = Article::where('slug', $slug)->where('visible', 1)->where("status", 1)->first();
 
-            if (($author == null)) {
+        if (($author == null) && ( $article == null)) {
 
-                return view('layouts.404');
-        
-            } elseif(($author !== null)) {
+            return view('layouts.404');
+       
+        } elseif(($author !== null) && ( $article == null)) {
 
-        
-                return view('category', ['category' => $author]);
             
+
+            $articles = Article::select(array("articles.id", "articles.title", "articles.slug"  , "articles.date_publish", "categories.name as categoryName",  "categories.slug as categorySlug" ,"articles.authorName", "articles.authorSlug","articles.ogImage"))
+            ->where("articles.visible", 1)
+            ->where("articles.status", 1)
+            ->where("categories.id", $author->id)
+            ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+            ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+            ->orderBy('articles.date_publish', 'desc')
+            ->paginate(9);
+
+            return view('category', ['articles' => $articles, 'category' => $author]);
+           
+    
+        }else{
+
+            $categories = Article::select(array("categories.name", "categories.slug"))
+            ->where("articles.visible", 1)
+            ->where("articles.id", $article->id)
+            ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+            ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+            ->get();
+
+            $tags = Article::select(array("tags.name", "tags.id", "tags.slug"))
+            ->where("articles.visible", 1)
+            ->where("articles.id", $article->id)
+            ->leftJoin("article_tags", "article_tags.article_id", "=", "articles.id")
+            ->leftJoin("tags", "tags.id", "=", "article_tags.tag_id")
+            ->get();
+
+            $tagsCount = Article::select(array("tags.name" ,"tags.id", "tags.slug"))
+            ->where("articles.visible", 1)
+            ->where("articles.id", $article->id)
+            ->leftJoin("article_tags", "article_tags.article_id", "=", "articles.id")
+            ->leftJoin("tags", "tags.id", "=", "article_tags.tag_id")
+            ->count();
+
+            $files = Article::select(array("fichiers.picture_link"))
+            ->where("articles.visible", 1)
+            ->where("articles.id", $article->id)
+            ->leftJoin("article_fichiers", "article_fichiers.article_id", "=", "articles.id")
+            ->leftJoin("fichiers", "fichiers.id", "=", "article_fichiers.fichier_id")
+            ->get();
+
+            $previous = Article::select('title', 'slug')->where('id', $article->id -1)->where('visible', 1)->where("status", 1)->first();
         
+            $next = Article::select('title', 'slug')->where('id', $article->id +1)->where('visible', 1)->where("status", 1)->first();
+
+            if($previous && $next){
+
+                $category = Article::select(array("categories.id"))
+                ->where("articles.visible", 1)
+                ->where("articles.id", $article->id)
+                ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->first();
+                
+                $similars = Article::select(array("articles.id", "articles.title", "articles.slug"  , "articles.date_publish", "categories.name as categoryName",  "categories.slug as categorySlug" ,"articles.authorName", "articles.authorSlug","articles.ogImage"))
+                ->where("articles.visible", 1)
+                ->where("articles.status", 1)
+                ->where("categories.id", $category->id)
+                ->where("articles.id", "!=" ,$article->id)
+                ->where("articles.id", "!=" ,$previous->id)
+                ->where("articles.id", "!=" ,$next->id)
+                ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->orderBy('articles.date_publish', 'desc')
+                ->take(9)->get();
+
+            }else{
+
+                $category = Article::select(array("categories.id"))
+                ->where("articles.visible", 1)
+                ->where("articles.id", $article->id)
+                ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->first();
+                
+                $similars = Article::select(array("articles.id", "articles.title", "articles.slug"  , "articles.date_publish", "categories.name as categoryName",  "categories.slug as categorySlug" ,"articles.authorName", "articles.authorSlug","articles.ogImage"))
+                ->where("articles.visible", 1)
+                ->where("articles.status", 1)
+                ->where("categories.id", $category->id)
+                ->where("articles.id", "!=" ,$article->id)
+                ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->orderBy('articles.date_publish', 'desc')
+                ->take(9)->get();
+
+               
+
             }
+
+            return view('article',[
+                'article' => $article, 
+                'categories' => $categories, 
+                'files' => $files, 
+                'tags' => $tags, 
+                'tagsCount' => $tagsCount, 
+                'previous' => $previous, 
+                'next' => $next,
+                'similars' => $similars
+                ]);
+
+
+        }
 
         }
         
+    }
+
+    public function tags($slug)
+    {
+       
+
+        $author = Tags::where('slug', $slug)->where('visible', 1)->first();
+
+        if ($author == null) {
+
+            return view('layouts.404');
+       
+        } else {
+
+           
+            $articles = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.date_publish", "categories.name as categoryName" ,"articles.authorName", "articles.authorSlug","articles.ogImage"))
+            ->where("articles.visible", 1)
+            ->where("articles.status", 1)
+            ->where("tags.id", $author->id)
+            ->leftJoin("article_tags", "article_tags.article_id", "=", "articles.id")
+            ->leftJoin("tags", "tags.id", "=", "article_tags.tag_id")
+            ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+            ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+            ->orderBy('articles.date_publish', 'desc')
+            ->paginate(9);
+
+            return view('tags', ['articles' => $articles, 'category' => $author]);
+           
+    
+        }
+
+    }
+
+    public function homePosts()
+    {
+
+        $articlesAlaUne = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.commentsCount", "categories.slug as categorySlug"  , "articles.date_publish", "categories.name as categoryName" ,"articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+        ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+        ->orderBy('articles.date_publish', 'desc')
+        ->take(4)
+        ->get();
+
+        // $politique = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        // ->where("articles.visible", 1)
+        // ->where("articles.status", 1)
+        // ->where("categories.id", 26)
+        // ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+        // ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+        // ->orderBy('articles.date_publish', 'desc')
+        // ->take(4)
+        // ->get();
+ 
+        return view('welcome', ['alaUne'=> $articlesAlaUne]);
+
+    }
+
+    public function importants(){
+
+        $important = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->where("categories.id", 18)
+        ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+        ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+        ->orderBy('articles.date_publish', 'desc')
+        ->take(8)
+        ->get();
+
+        return $this->sendResponse([
+            'important' =>  $important, 
+            'status' => 200
+        ], 'Liste des articles publiés');
+    }
+
+    public function aNePasManquer(){
+
+        $aNePasManquerTogo = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.commentsCount", "categories.slug as categorySlug"  , "articles.date_publish", "categories.name as categoryName" ,"articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->where("categories.id", 1)
+        ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+        ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+        ->orderBy('articles.date_publish', 'desc')
+        ->take(7)
+        ->get();
+
+        return $this->sendResponse([
+            'aNePasManquerTogo' =>  $aNePasManquerTogo, 
+            'status' => 200
+        ], 'Liste des articles publiés');
+    }
+
+    public function sports()
+    {
+
+        $sport = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->where("categories.id", 31)
+        ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+        ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+        ->orderBy('articles.date_publish', 'desc')
+        ->take(8)
+        ->get();
+
+        return $this->sendResponse([
+            'sports' =>  $sport, 
+            'status' => 200
+        ], 'Liste des articles publiés');
+
+
+    }
+
+    public function societe()
+    {
+
+        $societe = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->where("categories.id", 29)
+        ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+        ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+        ->orderBy('articles.date_publish', 'desc')
+        ->take(8)
+        ->get();
+
+        return $this->sendResponse([
+            'societe' =>  $societe, 
+            'status' => 200
+        ], 'Liste des articles publiés');
+
+
+    }
+
+    public function opinion()
+    {
+
+        $opinion = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->where("categories.id", 25)
+        ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+        ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+        ->orderBy('articles.date_publish', 'desc')
+        ->take(8)
+        ->get();
+
+        return $this->sendResponse([
+            'opinion' =>  $opinion, 
+            'status' => 200
+        ], 'Liste des articles publiés');
+
+
+    }
+
+    public function faitsdivers()
+    {
+
+        $faitsDivers = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->where("categories.id", 14)
+        ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+        ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+        ->orderBy('articles.date_publish', 'desc')
+        ->take(8)
+        ->get();
+
+        return $this->sendResponse([
+            'faitsDivers' =>  $faitsDivers, 
+            'status' => 200
+        ], 'Liste des articles publiés');
+
+
+    }
+
+    public function fenetre()
+    {
+
+        $fenetres = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->where("categories.id", 15)
+        ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+        ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+        ->orderBy('articles.date_publish', 'desc')
+        ->take(8)
+        ->get();
+
+        return $this->sendResponse([
+            'fenetres' =>  $fenetres, 
+            'status' => 200
+        ], 'Liste des articles publiés');
+
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function authors($slug)
+    {
+       
+
+        $author = Author::where('slug', $slug)->where('visible', 1)->first();
+
+        if ($author == null) {
+
+            return view('layouts.404');
+       
+        } else {
+
+            
+
+               
+                $articles = Article::select(array("articles.id", "articles.title", "articles.slug"  , "articles.date_publish", "categories.name as categoryName",  "categories.slug as categorySlug" ,"articles.authorName", "articles.authorSlug","articles.ogImage"))
+                ->where("articles.visible", 1)
+                ->where("articles.status", 1)
+                ->where("author_id", $author->id)
+                ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->orderBy('articles.date_publish', 'desc')
+                ->paginate(9);
+
+                return view('authors', ['articles' => $articles, 'category' => $author]);
+
+           
+    
+        }
+
     }
      /**
      * Store a newly created resource in storage.
