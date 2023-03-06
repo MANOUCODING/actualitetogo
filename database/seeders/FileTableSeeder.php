@@ -15,7 +15,7 @@ class FileTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 1; $i <= 93; $i++){
+        for($i = 1; $i <= 94; $i++){
 
             $medias = Http::get("https://www.togoactualite.com/wp-json/wp/v2/media/?per_page=100&page=$i")->json();
         

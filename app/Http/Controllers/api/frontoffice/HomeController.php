@@ -75,7 +75,7 @@ class HomeController extends BaseController
 
         }elseif ($slug == 'login') {
 
-            return view('backoffice');
+            return view('layouts.404');
 
         }else{
 

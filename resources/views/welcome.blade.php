@@ -117,8 +117,21 @@
 			</div>
         </div>
     </section>
+	<br>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-3">
+				<a href="#" class="card-img-flash d-block">
+					<img src="/assets/frontend/images/adv-2.png" alt="adv">
+				</a>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
 	<br><br>
 	<div id="acceuil"></div>
+	<br>
 </main>
 
 @endsection
