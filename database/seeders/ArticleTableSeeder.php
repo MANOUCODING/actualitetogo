@@ -39,12 +39,16 @@ class ArticleTableSeeder extends Seeder
                 foreach ($authors as $author) {
     
                     if ($author->wp_author_id === $value["author"]) {
+
+                        $cat = Category::where('id', $value["categories"][0])->where('visible', 1)->first();
                         
                         $post =  Article::create([
                             'title' => $value["title"]['rendered'],
                             'author_id' => $author->id,
                             'ogImage' => isset($value['yoast_head_json']["og_image"][0]['url']) ? str_replace("https://www.togoactualite.com/", "", $value['yoast_head_json']["og_image"][0]['url']) : "null",
                             'authorName' => $author->nomComplet,
+                            'categoryName' => $cat->name,
+                            'categorySlug' => $cat->slug,
                             'authorSlug' => $author->slug,
                             'content' => $value["content"]["rendered"],
                             'slug' => $value["slug"],

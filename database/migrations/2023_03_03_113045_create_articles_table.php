@@ -21,6 +21,8 @@ class CreateArticlesTable extends Migration
             $table->dateTime('date_publish')->nullable();
             $table->longText('ogImage');
             $table->string('authorName');
+            $table->string('categoryName');
+            $table->string('categorySlug');
             $table->string('authorSlug');
             $table->integer('status')->default(0);
             $table->integer('likesCount')->default(0);

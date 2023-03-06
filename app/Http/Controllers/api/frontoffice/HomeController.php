@@ -233,7 +233,7 @@ class HomeController extends BaseController
     public function homePosts()
     {
 
-        $articlesAlaUne = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        $articlesAlaUne = Article::select(array("articles.id", "articles.title", "articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
         ->where("articles.visible", 1)
         ->where("articles.status", 1)
         ->orderBy('articles.date_publish', 'desc')
