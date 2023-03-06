@@ -81,14 +81,44 @@
 			<div class="col-lg-4">
 				<div>
 					<br>
-					<h3 class="m-0"> <img src="/assets/frontend/images/togoactu.png" alt="" srcset=""> TOGO POLITIQUE</h3>
+					<h3 class="m-0"> <img src="/assets/frontend/images/togoactu.png" alt="" style="width: 40px" srcset=""> TOGO POLITIQUE</h3>
 				</div>
 				<div class="border-bottom border-primary border-2 opacity-1"></div>
 				<br/>
+				<div class="tab-content">
+							<!-- Most read tab START -->
+							<br>
+							<div class="tab-pane show active" id="politique">
+								@foreach ($politique as $result )
+									<div class="card" >
+										<div class="row g-3">
+											<div class="col-4">
+												<img class="rounded-3" src="/storage/{{$result->ogImage}}" alt="" style="height: 100px; width: 170px; object-fit: cover" >
+											</div>
+											<div class="col-8">
+												<h6><a href="/{{ $result->slug }}" class="btn-link stretched-link text-reset fw-bold"> {!! $result->title !!} </a></h6>
+											
+												<ul class="nav nav-divider align-items-center small">
+													<li class="nav-item">
+														<div class="nav-link position-relative">
+															<span>par <a href="/auteurs/{{$result->authorSlug}}" class="stretched-link text-reset btn-link">{{$result->authorName}}</a></span>
+														</div>
+													</li>
+													<li class="nav-item">{{ date('d/m/Y', strtotime($result->date_publish)) }}</li>
+												</ul>
+											</div>
+										</div>
+										<br />
+									</div>
+								@endforeach
+								
+							</div>
+						</div>
 			</div>
         </div>
     </section>
-
+	<br><br>
+	<div id="acceuil"></div>
 </main>
 
 @endsection

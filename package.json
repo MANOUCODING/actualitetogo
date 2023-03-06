@@ -19,6 +19,8 @@
         "vuex": "^4.1.0"
     },
     "dependencies": {
+        "@splidejs/vue-splide": "^0.6.12",
+        "moment": "^2.29.4",
         "vue": "^3.2.36",
         "vue-axios": "^3.5.2",
         "vue-router": "^4.1.6",

@@ -18,6 +18,8 @@ import newsletterF from './components/frontoffice/includes/newsletter.vue'
 
 import contactB from './components/frontoffice/contact.vue'
 
+import acceuilB from './components/frontoffice/acceuil.vue'
+
 //Integrer les composants frontoffice
 
 const categories = createApp(categoriesF)
@@ -40,6 +42,11 @@ contact.use(VueAxios, axios)
 
 contact.use(VueSweetalert2);
 
+const acceuil = createApp(acceuilB)
+
+acceuil.use(VueAxios, axios)
+
+acceuil.mount('#acceuil')
 
 categories.mount('#categories')
 

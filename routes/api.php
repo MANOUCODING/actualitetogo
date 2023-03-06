@@ -30,6 +30,20 @@ Route::post('/newsletter/store', [HomeController::class, 'storeNewsLetter']);
 
 Route::post('/contact/store', [HomeController::class, 'storeSms']);
 
+Route::get('/home/posts/important', [HomeController::class, 'importants']);
+
+Route::get('/home/posts/aNePasManquer', [HomeController::class, 'aNePasManquer']);
+
+Route::get('/home/posts/sports', [HomeController::class, 'sports']);
+
+Route::get('/home/posts/societe', [HomeController::class, 'societe']);
+
+Route::get('/home/posts/opinion', [HomeController::class, 'opinion']);
+
+Route::get('/home/posts/faits/divers', [HomeController::class, 'faitsdivers']);
+
+Route::get('/home/posts/fenetres', [HomeController::class, 'fenetre']);
+
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 
     Route::post('login', [AuthController::class, 'login']);

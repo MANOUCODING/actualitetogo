@@ -240,17 +240,15 @@ class HomeController extends BaseController
         ->take(4)
         ->get();
 
-        // $politique = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
-        // ->where("articles.visible", 1)
-        // ->where("articles.status", 1)
-        // ->where("categories.id", 26)
-        // ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
-        // ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
-        // ->orderBy('articles.date_publish', 'desc')
-        // ->take(4)
-        // ->get();
+        $politique = Article::select(array("articles.id", "articles.title", "articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->where("articles.categorySlug", 'politique')
+        ->orderBy('articles.date_publish', 'desc')
+        ->take(4)
+        ->get();
  
-        return view('welcome', ['alaUne'=> $articlesAlaUne]);
+        return view('welcome', ['alaUne'=> $articlesAlaUne, 'politique' => $politique]);
 
     }
 
