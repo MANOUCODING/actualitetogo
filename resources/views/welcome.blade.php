@@ -78,6 +78,14 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-lg-4">
+				<div>
+					<br>
+					<h3 class="m-0"> <img src="/assets/frontend/images/togoactu.png" alt="" srcset=""> TOGO POLITIQUE</h3>
+				</div>
+				<div class="border-bottom border-primary border-2 opacity-1"></div>
+				<br/>
+			</div>
         </div>
     </section>
 

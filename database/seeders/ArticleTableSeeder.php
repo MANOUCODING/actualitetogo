@@ -40,7 +40,7 @@ class ArticleTableSeeder extends Seeder
     
                     if ($author->wp_author_id === $value["author"]) {
 
-                        $cat = Category::where('id', $value["categories"][0])->where('visible', 1)->first();
+                        $cat = Category::where('wp_category_id', $value["categories"][0])->where('visible', 1)->first();
                         
                         $post =  Article::create([
                             'title' => $value["title"]['rendered'],
