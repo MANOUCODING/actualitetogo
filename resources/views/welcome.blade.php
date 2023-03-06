@@ -52,7 +52,7 @@
 								<div class="w-100 mt-auto">
 									<div class="col">
 										<!-- Card category -->
-										<!-- <a href="#" class="badge text-bg-primary mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>{{ $info->categoryName }}</a> -->
+										<a href="/{{$info->categorySlug}}" class="badge text-bg-primary mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>{{ $info->categoryName }}</a>
 										<!-- Card title -->
 										<h4 class="text-white "><a href="/{{ $info->slug }}" class="btn-link text-reset stretched-link fw-normal">{!! $info->title !!}</a></h4>
 										<!-- Card info -->

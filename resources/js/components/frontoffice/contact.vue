@@ -88,7 +88,8 @@
             <!-- submit button -->
             <div class="col-md-12 text-start">
                 <button class="btn btn-primary w-100" type="submit" v-if="!loading">Envoyer votre message</button>
-                <button class="btn btn-primary w-100" type="button" v-else>Envoie en cours ....</button>
+                <button class="btn btn-primary w-100" type="button" v-else><i  style="color: #fff" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                    <span class="sr-only"></span>Envoie en cours</button>
             </div>
         </div>
         </form>
