@@ -34,7 +34,7 @@
 											<div class="d-flex align-items-center position-relative">
                                                 <div class="d-flex align-items-center position-relative"> 
                                                     <i class="fa fa-2x fa-user-circle" ></i>
-                                                    &nbsp; par <span @click="author(result.authorSlug)" style="cursor: pointer" class="text-reset btn-link">{{ result.authorName }}</span>
+                                                    &nbsp; par &nbsp;<span @click="author(result.authorSlug)" style="cursor: pointer" class="text-reset btn-link">{{ result.authorName }}</span>
                                                 </div>
                                             </div>
 										</div>
