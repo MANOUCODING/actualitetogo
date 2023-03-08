@@ -32,6 +32,8 @@ Route::post('/contact/store', [HomeController::class, 'storeSms']);
 
 Route::get('/home/posts/important', [HomeController::class, 'importants']);
 
+Route::get('/home/posts/all', [HomeController::class, 'all']);
+
 Route::get('/home/posts/aNePasManquer', [HomeController::class, 'aNePasManquer']);
 
 Route::get('/home/posts/sports', [HomeController::class, 'sports']);

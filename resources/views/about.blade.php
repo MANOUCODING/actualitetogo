@@ -48,7 +48,7 @@ About START -->
             <div class="text-center">
             	<!-- Avatar img -->
               <div class="avatar avatar-xxl mb-2">
-              <i class="fa fa-5x fa-user-circle" ></i>
+                <i class="fa fa-5x fa-user-circle" ></i>
               </div>
              
               <h5 style="margin-top: -30px;">Alexandre. D.</h5>

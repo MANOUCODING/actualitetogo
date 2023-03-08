@@ -237,7 +237,7 @@ class HomeController extends BaseController
         ->where("articles.visible", 1)
         ->where("articles.status", 1)
         ->orderBy('articles.date_publish', 'desc')
-        ->take(4)
+        ->take(8)
         ->get();
 
         $politique = Article::select(array("articles.id", "articles.title", "articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
@@ -247,10 +247,38 @@ class HomeController extends BaseController
         ->orderBy('articles.date_publish', 'desc')
         ->take(4)
         ->get();
+
+        $international = Article::select(array("articles.id", "articles.title", "articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->where("articles.categorySlug", 'international')
+        ->orWhere("articles.categorySlug", 'monde')
+        ->orWhere("articles.categorySlug", 'afrique')
+        ->orderBy('articles.date_publish', 'desc')
+        ->take(10)
+        ->get();
  
-        return view('welcome', ['alaUne'=> $articlesAlaUne, 'politique' => $politique]);
+        return view('welcome', ['alaUne'=> $articlesAlaUne, 'politique' => $politique, 'international' => $international]);
 
     }
+
+    public function all()
+    {
+
+        $all = Article::select(array("articles.id", "articles.title", "articles.slug", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->take(14)
+        ->get();
+
+        return $this->sendResponse([
+            'all' =>  $all, 
+            'status' => 200
+        ], 'Liste des articles publiés');
+
+
+    }
+
 
     public function importants(){
 
@@ -279,7 +307,7 @@ class HomeController extends BaseController
         ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
         ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
         ->orderBy('articles.date_publish', 'desc')
-        ->take(7)
+        ->take(3)
         ->get();
 
         return $this->sendResponse([

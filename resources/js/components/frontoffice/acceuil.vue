@@ -1,6 +1,6 @@
 <template>
     <section class="pt-4 pb-0">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <ul class="nav nav-tabs">
@@ -208,84 +208,13 @@
         </div>
     </section>
     <br/>
-    <section className="pt-4 pb-0 card-grid">
-        <div v-if="loadANePasManquer == 1">
-            <div style="position: relative">
-                <div class="lds-ellipsis" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);"><div></div><div></div><div></div><div></div></div>
-                <br/><br/><br/><br/><br/><br/>
-            </div>
-        </div>
-        <div v-else-if="loadANePasManquer == 2">
-            <div className="container-fluid">
-
-                <div className="row g-4">
-                    <div className="col-lg-8">
-                        <div>
-                            <h3 className="m-0"><i className="bi bi-newspaper me-2"></i>A NE PAS MANQUER TOGO</h3>
-                        </div> 
-                    </div>
-                </div>
-                <br/>
-                <div className="border-bottom border-primary border-2 opacity-1"></div>
-            </div>
-            <br/>
-            <div className="container-fluid">
-                <div className="row g-4">
-                    <div className="col-lg-12">
-                        <Splide aria-label="My Favorite Images" :options="{type: 'loop', autoplay: true, interval: 3000 }">
-                            
-                            <SplideSlide v-for="result in aNePasManquerTogo" :key="result.id">
-                                <div class="card card-overlay-bottom card-img-scale">
-                                    
-                                    <img class="card-img" :src='getImage(result.ogImage)' alt="Card image" style="height: 600px; width: 1350px; object-fit: cover"/>
-                                    
-                                    <div class="card-img-overlay d-flex align-items-center p-3 p-sm-5"> 
-                                        <div class="w-100 mt-auto">
-                                            <div class="col">
-                                                
-                                                <a href="#" class="badge text-bg-info mb-2"><i class="fas fa-circle me-2"></i> {{result.categoryName}} </a>
-                                                
-                                                <h5 class="text-white"><span @click="article(result.slug)" style="cursor: pointer" class="btn-link text-reset stretched-link fw-normal" v-html="result.title"></span></h5>
-                                            
-                                                <ul class="nav nav-divider text-white-force align-items-center d-none d-sm-inline-block">
-                                                    <li class="nav-item">
-                                                        <div class="nav-link">
-                                                            <div class="d-flex align-items-center text-white position-relative">
-                                                               par <span @click="author(result.authorSlug)" style="cursor: pointer" class="stretched-link text-reset btn-link ms-3">{{ result.authorName }}</span>                                                                
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="nav-item">{{ moment(result.date_publish).format(" MMM DD, YYYY") }}</li>
-                                                    <li class="nav-item">
-                                                        <a href="#" class="btn-link"><i class="fas fa-comment-alt me-1"></i> {{ result.commentsCount }} Commentaires</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </SplideSlide>
-                    </Splide>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div v-else>
-
-        </div>
-    </section>
-    <br/> <br />
+    
 </template>
 
 <script>
 import moment from 'moment'
-import { Splide, SplideSlide } from '@splidejs/vue-splide'
-import '@splidejs/vue-splide/css';
 export default {
-    components: {
-        Splide,
-        SplideSlide,
-    },
+    
     data(){
         return {
             
@@ -301,8 +230,8 @@ export default {
             faitsDivers: {},
             loadFenetre: false,
             fenetres: {},
-            loadANePasManquer: 3,
-            aNePasManquerTogo: {},
+            // loadANePasManquer: 3,
+            // aNePasManquerTogo: {},
             loadImportant: 3,
             important: {}
         }
@@ -323,19 +252,7 @@ export default {
 
                     this.important = response.data.data.important
 
-                    this.loadANePasManquer = 1
-
-                    this.axios.get('/api/home/posts/aNePasManquer' )
-                        .then(response => { 
-
-                        if(response.data.data.status == 200){
-
-                            this.loadANePasManquer = 2
-
-                            this.aNePasManquerTogo = response.data.data.aNePasManquerTogo
-
-                        }
-                    });
+                    
 
                 }
 
