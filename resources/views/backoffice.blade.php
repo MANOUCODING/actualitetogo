@@ -1,39 +1,44 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-
-<!-- Mirrored from radixtouch.in/templates/admin/smart/source/light/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 12 Feb 2019 10:17:40 GMT -->
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta content="width=device-width, initial-scale=1" name="viewport" />
-	<meta name="description" content="Responsive Admin Template" />
-	<meta name="author" content="RedstarHospital" />
-	<title>Smart University | Bootstrap Responsive Admin Template</title>
-	<!-- google font -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
-	<!-- icons -->
-	<link href="/assets/backoffice/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="/assets/backoffice/plugins/iconic/css/material-design-iconic-font.min.css">
-	<!-- bootstrap -->
-	<link href="/assets/backoffice/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<!-- style -->
-	<link rel="stylesheet" hr="/assets/backoffice/css/pages/extra_pages.css">
-	<!-- favicon -->
-	<link rel="shortcut icon" href="http://radixtouch.in/templates/admin/smart/source/assets/backoffice/img/favicon.ico" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Adminidtration || togoactualite</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <link href="/assets/admin/css/loader.css" rel="stylesheet">
+
 </head>
 
 <body id="backoffice">
 
-<!-- start js include path -->
-<script src="/assets/backoffice/plugins/jquery/jquery.min.js"></script>
-	<!-- bootstrap -->
-	<script src="/assets/backoffice/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/assets/backoffice/js/pages/extra-pages/pages.js"></script>
-	<!-- end js include path -->
+
+    <script src=" {{ asset('js/app.js') }} "></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/assets/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/assets/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/assets/admin/js/sb-admin-2.min.js"></script>
+
 </body>
 
-
-<!-- Mirrored from radixtouch.in/templates/admin/smart/source/light/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 12 Feb 2019 10:17:47 GMT -->
 </html>

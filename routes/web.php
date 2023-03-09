@@ -21,3 +21,5 @@ Route::get('/{slug}', [HomeController::class, 'category']);
 Route::get('/auteurs/{slug}', [HomeController::class, 'authors']);
 
 Route::get('/tags/{slug}', [HomeController::class, 'tags']);
+
+

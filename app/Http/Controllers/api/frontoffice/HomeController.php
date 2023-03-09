@@ -75,7 +75,7 @@ class HomeController extends BaseController
 
         }elseif ($slug == 'login') {
 
-            return view('layouts.404');
+            return view('backoffice');
 
         }else{
 
@@ -257,8 +257,16 @@ class HomeController extends BaseController
         ->orderBy('articles.date_publish', 'desc')
         ->take(10)
         ->get();
+
+        $aNePasManquer = Article::select(array("articles.id", "articles.title", "articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        ->where("articles.visible", 1)
+        ->where("articles.status", 1)
+        ->where("articles.categorySlug", 'a-ne-pas-rater-togo')
+        ->orderBy('articles.date_publish', 'desc')
+        ->take(6)
+        ->get();
  
-        return view('welcome', ['alaUne'=> $articlesAlaUne, 'politique' => $politique, 'international' => $international]);
+        return view('welcome', ['alaUne'=> $articlesAlaUne, 'politique' => $politique, 'international' => $international, 'aNePasManquer' => $aNePasManquer]);
 
     }
 
