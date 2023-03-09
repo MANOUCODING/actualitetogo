@@ -20965,9 +20965,8 @@ var _hoisted_19 = {
 var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fa fa-2x fa-user-circle"
 }, null, -1 /* HOISTED */);
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("   par  ");
-var _hoisted_22 = ["onClick"];
-var _hoisted_23 = {
+var _hoisted_21 = ["onClick"];
+var _hoisted_22 = {
   "class": "nav-item"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -20988,7 +20987,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       },
       "class": "btn-link stretched-link text-reset fw-bold",
       innerHTML: result.title
-    }, null, 8 /* PROPS */, _hoisted_14)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Card info "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    }, null, 8 /* PROPS */, _hoisted_14)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Card info "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
       onClick: function onClick($event) {
         return $options.author(result.authorSlug);
       },
@@ -20996,7 +20995,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "cursor": "pointer"
       },
       "class": "text-reset btn-link"
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(result.authorName), 9 /* TEXT, PROPS */, _hoisted_22)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.moment(result.date_publish).format(" MMM DD, YYYY")), 1 /* TEXT */)])])])])]);
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(result.authorName), 9 /* TEXT, PROPS */, _hoisted_21)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.moment(result.date_publish).format(" MMM DD, YYYY")), 1 /* TEXT */)])])])])]);
   }), 128 /* KEYED_FRAGMENT */))]))])]);
 }
 
