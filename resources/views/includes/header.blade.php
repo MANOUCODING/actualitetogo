@@ -113,7 +113,7 @@
                                     <a class="nav-link px-2 fs-5 text-primary" href="https://twitter.com/Togoactualite" target="_blank"><i class="fab fa-2x fa-twitter-square"></i></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link px-2 fs-5 text-primary" href="#"><i class="fab fa-2x fa-linkedin"></i></a>
+                                    <a class="nav-link px-2 fs-5 text-primary" href="https://fr.linkedin.com/in/togoactualite-togo-actualit%C3%A9-3a076648"><i class="fab fa-2x fa-linkedin"></i></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link px-2 fs-5 text-success" href="https://wa.link/qf0v9s" target="_blank"><i class="fab fa-2x fa-whatsapp"></i></a>
