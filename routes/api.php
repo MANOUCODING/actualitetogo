@@ -1,6 +1,9 @@
 <?php
 
+
 use App\Http\Controllers\api\backoffice\AuthController;
+use App\Http\Controllers\api\backoffice\CategoryController;
+use App\Http\Controllers\api\backoffice\NewsLetterController;
 use App\Http\Controllers\api\frontoffice\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,8 +52,37 @@ Route::get('/home/posts/fenetres', [HomeController::class, 'fenetre']);
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 
     Route::post('login', [AuthController::class, 'login']);
+
     Route::post('logout', [AuthController::class, 'logout']);
+
     Route::post('refresh', [AuthController::class, 'refresh']);
+    
     Route::post('me', [AuthController::class, 'me']);
+
+    //Gestion des categories
+
+    Route::get('/admin/category', [CategoryController::class, 'index']);
+
+    Route::post('/admin/category/store', [CategoryController::class, 'store']);
+
+    Route::put('/admin/category/{slug}/update', [CategoryController::class, 'update']);
+    
+    Route::get('/admin/category/{slug}', [CategoryController::class, 'show']);
+
+    Route::get('/admin/category/{slug}/delete', [CategoryController::class, 'destroy']);
+
+    //Gestion des news_letters
+
+    Route::get('/admin/newsletter', [NewsLetterController::class, 'index']);
+
+    Route::post('/admin/newsletter/store', [NewsLetterController::class, 'store']);
+
+    Route::put('/admin/newsletter/{slug}/update', [NewsLetterController::class, 'update']);
+    
+    Route::get('/admin/newsletter/{slug}', [NewsLetterController::class, 'show']);
+
+    Route::get('/admin/newsletter/{id}/delete', [NewsLetterController::class, 'destroy']);
+
+    Route::get('/admin/newsletter/{id}/status', [NewsLetterController::class, 'changerStatusNewsletters']);
 
 });

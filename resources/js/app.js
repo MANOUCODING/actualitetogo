@@ -16,6 +16,17 @@ import backofficeH from './components/backoffice/backoffice.vue'
 
 import backOfficeRouter from './router/backoffice'
 
+//Importer les composants layouts bacoffice
+
+import topbar from './components/backoffice/includes/topbar.vue'
+
+import sidebar from './components/backoffice/includes/sidebar.vue'
+
+import sidebarAuthor from './components/backoffice/includes/sidebarAuthor.vue'
+
+import footerbar from './components/backoffice/includes/footerbar.vue'
+
+
 
 // Importer les composants frontoffice
 
@@ -41,8 +52,17 @@ backoffice.use(VueAxios, axios)
 
 backoffice.use(backOfficeRouter)
 
-backoffice.mount('#backoffice')
+backoffice.use(VueSweetalert2);
 
+backoffice.component('topbar', topbar)
+
+backoffice.component('sidebar', sidebar)
+
+backoffice.component('sidebarAuthor', sidebarAuthor)
+
+backoffice.component('footerbar', footerbar)
+
+backoffice.mount('#backoffice')
 
 //Integrer les composants frontoffice
 

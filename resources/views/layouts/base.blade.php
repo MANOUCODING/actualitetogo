@@ -16,6 +16,8 @@
 	<link rel="stylesheet" type="text/css" href="/assets/frontend/vendor/bootstrap-icons/bootstrap-icons.css">
 	<link rel="stylesheet" type="text/css" href="/assets/frontend/vendor/tiny-slider/tiny-slider.css">
 
+	
+
 	<!-- Theme CSS -->
 	<link id="style-switch" rel="stylesheet" type="text/css" href="/assets/frontend/css/style.css">
 

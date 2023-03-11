@@ -73,7 +73,7 @@ class AuthController extends Controller
                 'username' => 'required|email',
                 'password' => 'required|string|min:5',
             ], [
-                'username.required' => 'Le :attribute ou numero de téléphone est obligatoire.',
+                'username.required' => ':attribute ou le numero de téléphone est obligatoire.',
                 'password.required' => 'Le :attribute est obligatoire.'
             ],[
                 'username' => 'L\'email',
@@ -85,14 +85,14 @@ class AuthController extends Controller
             }
 
             $username = $request->input('username');
-            $currentUser = User::where('email', $username)->where('status', true)->first();;
+            $user = User::where('email', $username)->where('status', true)->first();;
 
-            if (is_null($currentUser)) {
+            if (is_null($user)) {
                 return response()->json(['error' => true,
                     'message' => 'Aucun utilisateur trouvé avec cet email.', 'status' => 422], 200);
             }
 
-            if ($currentUser->status === 0) {
+            if ($user->status === 0) {
                 return response()->json(['error' => true,
                     'activate' => false,
                     'message' => 'Veuillez activer votre compte.', 'status' => 422], 200);
@@ -113,7 +113,7 @@ class AuthController extends Controller
                 'username' => 'required|string|min:5',
                 'password' => 'required|string|min:5',
             ], [
-                'required' => 'Le :attribute ou email est obligatoire.',
+                'required' => 'Le :attribute ou l\'email est obligatoire.',
                 'password.required' => 'Le :attribute est obligatoire.'
             ], [
                 'username' => 'nom d\'utilisateur',
@@ -123,10 +123,10 @@ class AuthController extends Controller
                 return response()->json(['errors'=> $validator->errors(), 'status' => 401], 200);
             }
 
-            $user = User::where('telephone', $request->username)->first();
+            $user = User::where('username', $request->username)->first();
 
             if (is_null($user)) {
-                return response()->json(['error' => true, 'message' => 'Aucun utilisateur trouvé avec ce numéro.','status' => 422], 200);
+                return response()->json(['error' => true, 'message' => 'Aucun utilisateur trouvé avec ce nom.','status' => 422], 200);
             }
 
             if ($user->status === 0) {
@@ -141,7 +141,7 @@ class AuthController extends Controller
                     'message' => 'Votre compte est suspendu.','status' => 422], 200);
             }
 
-            $credentials = array_merge(['telephone' => $request->input('username')], $request->only('password'));
+            $credentials = array_merge(['username' => $request->input('username')], $request->only('password'));
             if (!$token = Auth::guard('api')->attempt($credentials)) {
                 return response()->json(['error' => true,
                     'errorType' => 'credentialsError',
@@ -150,7 +150,7 @@ class AuthController extends Controller
         }
 
        
-        return $this->createNewToken($token);
+        return response()->json(['token' => $this->createNewToken($token), 'user' => $user, 'status' => 200], 200);
     }
 
     public function me()

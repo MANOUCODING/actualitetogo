@@ -55,7 +55,9 @@
                                                 </div>
                                             </div>
                                             <button type="button" v-if="loading" class="btn btn-primary btn-user btn-block">
-                                                Connexion en cours ...
+                                                <i  style="color: #fff" class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+                                                <span class="sr-only">Loading...</span>  Connexion en cours ...
+                                               
                                             </button>
                                             <button type="submit" @click.prevent="submitLogin" v-else class="btn btn-primary btn-user btn-block">
                                                 Se connecter
@@ -84,7 +86,6 @@
     </div>
 </template>
 <script>
-
 import store from '../../store/index'
     export default {
         data() {
@@ -113,12 +114,21 @@ import store from '../../store/index'
 
                         store.commit('loginUser')
 
-                        store.state.user.token = response.data.access_token
+                        store.state.user.token = response.data.token.original.access_token
 
-                        localStorage.setItem('token', response.data.access_token)
+                        store.state.user.role = response.data.user.role_name
 
+                        localStorage.setItem('token', response.data.token.original.access_token)
 
-                        this.$router.push({ name: 'dashboard' })
+                        if(response.data.user.role_name == "admin"){
+
+                            this.$router.push({ name: 'admins.dashboard' })
+
+                        }else{
+
+                            this.$router.push({ name: 'authors.dashboard' })
+
+                        }
 
                     }else{
 

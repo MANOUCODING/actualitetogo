@@ -13,8 +13,10 @@
             </div>
             <div class="col-12">
                 <button type="submit"  class="btn btn-lg btn-danger m-0" v-if="!loading">S' abonner</button>
-                <button type="button"  class="btn btn-lg btn-danger m-0" v-else> <i  style="color: #fff" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-<span class="sr-only">Loading...</span> Enregistrement</button>
+                <button type="button"  class="btn btn-lg btn-danger m-0" v-else> 
+                    <i  style="color: #fff" class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+                    <span class="sr-only">Loading...</span> En cours ...
+                </button>
             </div>
             <div class="form-text mt-2 text-white">
                Etre avertis de nos prochains articles

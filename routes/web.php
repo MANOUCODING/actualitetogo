@@ -22,4 +22,13 @@ Route::get('/auteurs/{slug}', [HomeController::class, 'authors']);
 
 Route::get('/tags/{slug}', [HomeController::class, 'tags']);
 
+Route::view('/admin/dashboard', 'backoffice');
+
+Route::view('/admin/newsletters', 'backoffice');
+
+Route::view('/admin/category', 'backoffice');
+
+Route::view('/authors/dashboard', 'backoffice');
+   
+
 
