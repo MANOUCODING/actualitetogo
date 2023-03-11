@@ -23,6 +23,8 @@
 
     <link href="/assets/admin/css/loader.css" rel="stylesheet">
 
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5594963864359932"
+     crossorigin="anonymous"></script>
 
 </head>
 
