@@ -18,9 +18,9 @@ class UserTableSeeder extends Seeder
         User::create([
             'nomComplet' => "Alexandre DENANYO",
             'username' => "MawuwonamTG",
-            'email' =>  "manouadjanor@gmail.com",
+            'email' =>  "nonojack@yahoo.fr",
             'role_name' => "admin",
-            'password' => Hash::make("emideljesus2020@amen")
+            'password' => Hash::make("040567Ionos")
         ]);
 
         User::create([
