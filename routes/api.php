@@ -4,6 +4,7 @@
 use App\Http\Controllers\api\backoffice\AuthController;
 use App\Http\Controllers\api\backoffice\CategoryController;
 use App\Http\Controllers\api\backoffice\NewsLetterController;
+use App\Http\Controllers\api\backoffice\TagsController;
 use App\Http\Controllers\api\frontoffice\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -70,6 +71,30 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::get('/admin/category/{slug}', [CategoryController::class, 'show']);
 
     Route::get('/admin/category/{slug}/delete', [CategoryController::class, 'destroy']);
+
+    Route::get('/admin/category/{slug}/articles/all', [CategoryController::class, 'all']);
+
+    Route::get('/admin/category/{slug}/articles/publish', [CategoryController::class, 'publish']);
+
+    Route::get('/admin/category/{slug}/articles/not/publish', [CategoryController::class, 'notPublish']);
+
+    //Gestion des tags
+
+    Route::get('/admin/tags', [TagsController::class, 'index']);
+
+    Route::post('/admin/tags/store', [TagsController::class, 'store']);
+
+    Route::put('/admin/tags/{slug}/update', [TagsController::class, 'update']);
+    
+    Route::get('/admin/tags/{slug}', [TagsController::class, 'show']);
+
+    Route::get('/admin/tags/{slug}/delete', [TagsController::class, 'destroy']);
+
+    Route::get('/admin/tags/{slug}/articles/all', [TagsController::class, 'all']);
+
+    Route::get('/admin/tags/{slug}/articles/publish', [TagsController::class, 'publish']);
+
+    Route::get('/admin/tags/{slug}/articles/not/publish', [TagsController::class, 'notPublish']);
 
     //Gestion des news_letters
 

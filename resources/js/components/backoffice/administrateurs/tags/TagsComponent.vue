@@ -10,12 +10,12 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Les catégories</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Les Tags</h1>
                     </div>
                     
                     <div v-if="addCategoryButton" class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Ajouter une catégorie</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Ajouter un tag</h6>
                            
                             <button type="button" style="float: right; margin-top: -20px" @click="closeAddCategory" class="btn btn-danger">Fermez</button>
                            
@@ -63,7 +63,7 @@
                     </div>
                     <div v-if="updateCategoryButton" class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Modifier une catégorie</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Modifier un tag</h6>
                            
                             <button type="button" style="float: right; margin-top: -20px" @click="closeUpdateCategory" class="btn btn-danger">Fermez</button>
                            
@@ -115,9 +115,9 @@
                     </div>
                     <div v-else class="card shadow mb-4 border-left-success">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Liste des catégories</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Liste des tags</h6>
                            
-                            <button type="button" style="float: right; margin-top: -20px" v-if="!addCategoryButton" @click="addCategory" class="btn btn-success">Ajouter une catégorie</button>
+                            <button type="button" style="float: right; margin-top: -20px" v-if="!addCategoryButton" @click="addCategory" class="btn btn-success">Ajouter un tag</button>
                            
                         </div>
                         <div class="card-body" v-if="empty === 0">
@@ -149,7 +149,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Catégorie</th>
+                                            <th>Tags</th>
                                             <th>slug</th>
                                             <th>Articles</th>
                                             <th>Ajouté le</th>
@@ -158,20 +158,20 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Catégorie</th>
+                                            <th>Tags</th>
                                             <th>slug</th>
                                             <th>Articles</th>
                                             <th>Ajouté le</th>
                                             <th>Actions</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody v-for="info in infos.categories.data" :key="info.id">
+                                    <tbody v-for="info in infos.tags.data" :key="info.id">
                                         <tr>
-                                            <th> <router-link :to="{ name: 'admins.category.articles', params: {slug : info.slug }}">{{ info.name }}</router-link></th>
+                                            <th> <router-link :to="{ name: 'admins.tags.articles', params: {slug : info.slug }}">{{ info.name }}</router-link></th>
                                             <td>{{ info.slug }}</td>
                                             <td>
-                                                <router-link :to="{ name: 'admins.category.articles', params: {slug : info.slug }}" v-if="info.count == 0" class="btn btn-danger btn-rounded">Pas d'articles</router-link>
-                                                <router-link :to="{ name: 'admins.category.articles', params: {slug : info.slug }}" v-else class="btn btn-primary btn-rounded">{{ info.count }} article(s)</router-link>
+                                                <router-link :to="{ name: 'admins.tags.articles', params: {slug : info.slug }}" v-if="info.count == 0" class="btn btn-danger btn-rounded">Pas d'articles</router-link>
+                                                <router-link :to="{ name: 'admins.tags.articles', params: {slug : info.slug }}" v-else class="btn btn-primary btn-rounded">{{ info.count }} article(s)</router-link>
                                             </td>
                                             <td>{{ moment(info.updated_at).format(" MMM DD, YYYY") }}</td>
                                             <td>
@@ -180,7 +180,7 @@
                                                       <button type="button" class="btn btn-rounded btn-success" @click="updateCategory(info.slug)"> <i class="fa fa-edit"></i></button>
                                                     </div>
                                                    <div class="col-md-3">
-                                                      <router-link :to="{ name: 'admins.category.articles', params: {slug : info.slug }}" class="btn btn-rounded btn-info">
+                                                      <router-link :to="{ name: 'admins.tags.articles', params: {slug : info.slug }}" class="btn btn-rounded btn-info">
                                                         <i class="fa fa-eye"></i>
                                                       </router-link>
                                                     </div>
@@ -195,7 +195,7 @@
                                 <br/>
                                 <Bootstrap5Pagination
                                 class="mb-0"
-                                :data="infos.categories"
+                                :data="infos.tags"
                                 :limit="2"
                                 :show-disabled="showDisabled"
                                 :size="size"
@@ -267,7 +267,7 @@ export default {
         
         getResults(page = 1){
             axios
-            .get(`/api/auth/admin/category?page=${page}&search=${this.search}`, {
+            .get(`/api/auth/admin/tags?page=${page}&search=${this.search}`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
@@ -318,7 +318,7 @@ export default {
         saveCategory(){
             this.loading = true
            
-            axios.post('/api/auth/admin/category/store',{
+            axios.post('/api/auth/admin/tags/store',{
                 name : this.data.name,
             }, {
                 headers: {
@@ -406,7 +406,7 @@ export default {
         update(slug){
             this.loading = true
             
-            axios.put(`/api/auth/admin/category/${slug}/update`,{
+            axios.put(`/api/auth/admin/tags/${slug}/update`,{
                 name : this.data.name,
             }, {
                 headers: {
@@ -496,7 +496,7 @@ export default {
         updateCategory(slug){
             this.updateCategoryButton = true;
             this.addCategoryButton = false;
-            axios.get(`/api/auth/admin/category/${slug}`, {
+            axios.get(`/api/auth/admin/tags/${slug}`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
@@ -558,7 +558,7 @@ export default {
         deleteCategory(slug) {
             this.$swal({
                 title: "Etes-vous sûr?",
-                text: "Vous ne pourrez plus récupérer cette catégorie avec ses articles!",
+                text: "Vous ne pourrez plus récupérer cett tag avec ses articles!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "blue",
@@ -569,7 +569,7 @@ export default {
             }).then((confirmed) => {
                 if (confirmed.isConfirmed) {
                 axios
-                .get(`/api/auth/admin/category/${slug}/delete`, {
+                .get(`/api/auth/admin/tags/${slug}/delete`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }

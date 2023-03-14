@@ -15,9 +15,9 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <router-link class="nav-link" style="cursor: pointer;" to="/admin/category">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Tableau de bord</span></a>
+                <span>Tableau de bord</span></router-link>
         </li>
 
         <!-- Divider -->
@@ -38,10 +38,10 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header"></h6>
-                    <a class="collapse-item" href="buttons.html">Tous les articles</a>
-                    <a class="collapse-item" href="cards.html">Les articles publiés</a>
-                    <a class="collapse-item" href="cards.html">Les brouillons</a>
-                    <a class="collapse-item" href="cards.html">Ajouter un article</a>
+                    <router-link class="nav-link" style="cursor: pointer;" to="/admin/articles">Tous les articles</router-link>
+                    <router-link class="nav-link" style="cursor: pointer;" to="/admin/articles/publish">Les articles publiés</router-link>
+                    <router-link class="nav-link" style="cursor: pointer;" to="/admin/articles/not/publish">Les brouillons</router-link>
+                    <router-link class="nav-link" style="cursor: pointer;" to="/admin/articles/create">Ajouter un article</router-link>
                 </div>
             </div>
         </li>
@@ -56,30 +56,30 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <router-link class="nav-link" style="cursor: pointer;" to="/admin/tags">
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>Les tags ou étiquettes</span>
-            </a>
+            </router-link>
             
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <router-link class="nav-link" style="cursor: pointer;" to="/admin/authors">
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>Les auteurs</span>
-            </a>
+            </router-link>
             
         </li>
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
+            <router-link class="nav-link" style="cursor: pointer;" to="/admin/files">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Les fichiers</span></a>
+            <span>Les fichiers</span></router-link>
         </li>
 
         <li class="nav-item">
-            <router-link class="nav-link" style="cursor: pointer;" to="/newsletters">
+            <router-link class="nav-link" style="cursor: pointer;" to="/admin/messages">
             <i class="fas fa-envelope fa-fw"></i>
             <span>Messages</span></router-link>
         </li>
@@ -94,9 +94,9 @@
 
           <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
+            <router-link class="nav-link" style="cursor: pointer;" to="/admin/users">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Les utilisateurs</span></a>
+            <span>Les utilisateurs</span></router-link>
         </li>
 
         <li class="nav-item">

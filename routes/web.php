@@ -28,6 +28,20 @@ Route::view('/admin/newsletters', 'backoffice');
 
 Route::view('/admin/category', 'backoffice');
 
+Route::view('/admin/category/{slug}/articles', 'backoffice');
+
+Route::view('/admin/category/{slug}/articles/publish', 'backoffice');
+
+Route::view('/admin/category/{slug}/articles/not/publish', 'backoffice');
+
+Route::view('/admin/tags', 'backoffice');
+
+Route::view('/admin/tags/{slug}/articles', 'backoffice');
+
+Route::view('/admin/tags/{slug}/articles/publish', 'backoffice');
+
+Route::view('/admin/tags/{slug}/articles/not/publish', 'backoffice');
+
 Route::view('/authors/dashboard', 'backoffice');
    
 

@@ -207,4 +207,288 @@ class CategoryController extends BaseController
 
         return $this->sendResponse(['category' => $category, 'status' => 200 ], 'Votre catégorie a ete supprimée avec succès.');
     }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function all($slug)
+    {
+        $categoryCount = Category::where('visible', 1)->count();
+
+        $author = Category::where('slug', $slug)->where('visible', 1)->first();
+
+        if ($author == null) {
+
+            return $this->sendResponse([ 'slug' => $slug, 'author' => 0, 'articleCount' => 0, 'articlePublishCount' => 0, 'articleNotPublishCount' => 0, 'status' => 404], 'Cette catégorie n\'existe pas');
+       
+        } else {
+
+            if ($categoryCount == 0) {
+
+                return $this->sendResponse([ 'slug' => $slug,'author' => $author->name,'articleCount' => 0, 'articlePublishCount' => 0, 'articleNotPublishCount' => 0, 'status' => 401], 'Aucune catégorie n\'est enregistrée.');
+    
+            } else {
+    
+                $articleCount = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                ->where("articles.visible", 1)
+                ->where('article_categories.category_id', $author->id)
+                ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->count();
+    
+                $articlePublishCount = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                ->where("articles.visible", 1)
+                ->where("articles.status", 1)
+                ->where('article_categories.category_id', $author->id)
+                ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->count();
+    
+                $articleNotPublishCount = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                ->where("articles.visible", 1)
+                ->where("articles.status", 0)
+                ->where('article_categories.category_id', $author->id)
+                ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->count();
+    
+                if ($articleCount == 0) {
+        
+                    return $this->sendResponse(['slug' => $slug,'author' => $author->name,'articleCount' => $articleCount, 'articlePublishCount' => $articlePublishCount, 'articleNotPublishCount' => $articleNotPublishCount , 'status' => 401], 'Aucun article de cette catégorie n\'est enregistré.');
+        
+                }else{
+                   
+                    if ($articleCount == 0) {
+            
+                        return $this->sendResponse(['slug' => $slug,'author' => $author->name,'articleCount' => $articleCount, 'articlePublishCount' => $articlePublishCount, 'articleNotPublishCount' => $articleNotPublishCount, 'status' => 401], 'Aucun article de cette catégorie n\'est enregistré.');
+            
+                    }else{
+
+                        if(request('search')){
+
+                            $articlePublish = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                            ->where("articles.visible", 1)
+                            ->where('articles.title', 'like', '%'. request('search') . '%')
+                            ->orWhere('articles.slug', 'like', '%'. request('search') . '%')
+                            ->orWhere('articles.date_publish', 'like', '%'. request('search') . '%')
+                            ->orWhere('categories.name', 'like', '%'. request('search') . '%')
+                            ->where('article_categories.category_id', $author->id)
+                            ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                            ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                            ->orderBy('articles.date_publish', 'desc')
+                            ->paginate(10);
+            
+                        }else{
+            
+                            $articlePublish = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                            ->where("articles.visible", 1)
+                            ->where('article_categories.category_id', $author->id)
+                            ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                            ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                            ->orderBy('articles.date_publish', 'desc')
+                            ->paginate(10);
+            
+                        }
+    
+                       
+    
+                        return $this->sendResponse(['slug' => $slug, 'author' => $author->name ,'articleCount' => $articleCount, 'articlePublishCount' => $articlePublishCount, 'articleNotPublishCount' => $articleNotPublishCount, 'articlePublish' => $articlePublish, 'status' => 200], 'Liste des articles publiés');
+                    }
+                }
+            }
+        }
+                
+    }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function publish($slug)
+    {
+        $categoryCount = Category::where('visible', 1)->count();
+
+        $author = Category::where('slug', $slug)->where('visible', 1)->first();
+
+        if ($author == null) {
+
+            return $this->sendResponse([ 'slug' => $slug, 'author' => 0, 'articleCount' => 0, 'articlePublishCount' => 0, 'articleNotPublishCount' => 0, 'status' => 404], 'Cette catégorie n\'existe pas');
+       
+        } else {
+
+            if ($categoryCount == 0) {
+
+                return $this->sendResponse([ 'slug' => $slug,'author' => $author->name,'articleCount' => 0, 'articlePublishCount' => 0, 'articleNotPublishCount' => 0, 'status' => 401], 'Aucune catégorie n\'est enregistrée.');
+    
+            } else {
+    
+                $articleCount = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                ->where("articles.visible", 1)
+                ->where('article_categories.category_id', $author->id)
+                ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->count();
+    
+                $articlePublishCount = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                ->where("articles.visible", 1)
+                ->where("articles.status", 1)
+                ->where('article_categories.category_id', $author->id)
+                ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->count();
+    
+                $articleNotPublishCount = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                ->where("articles.visible", 1)
+                ->where("articles.status", 0)
+                ->where('article_categories.category_id', $author->id)
+                ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->count();
+    
+                if ($articleCount == 0) {
+        
+                    return $this->sendResponse(['slug' => $slug,'author' => $author->name,'articleCount' => $articleCount, 'articlePublishCount' => $articlePublishCount, 'articleNotPublishCount' => $articleNotPublishCount, 'status' => 401 ], 'Aucun article de cette catégorie n\'est enregistré.');
+        
+                }else{
+                   
+                    if ($articlePublishCount == 0) {
+            
+                        return $this->sendResponse(['slug' => $slug,'author' => $author->name,'articleCount' => $articleCount, 'articlePublishCount' => $articlePublishCount, 'articleNotPublishCount' => $articleNotPublishCount, 'status' => 401], 'Aucun article publié de cette catégorie n\'est enregistré.');
+            
+                    }else{
+    
+                        if(request('search')){
+
+                            $articlePublish = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                            ->where("articles.visible", 1)
+                            ->where("articles.status", 1)
+                            ->where('articles.title', 'like', '%'. request('search') . '%')
+                            ->orWhere('articles.slug', 'like', '%'. request('search') . '%')
+                            ->orWhere('articles.date_publish', 'like', '%'. request('search') . '%')
+                            ->orWhere('categories.name', 'like', '%'. request('search') . '%')
+                            ->where('article_categories.category_id', $author->id)
+                            ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                            ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                            ->orderBy('articles.date_publish', 'desc')
+                            ->paginate(10);
+            
+                        }else{
+            
+                            $articlePublish = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                            ->where("articles.visible", 1)
+                            ->where("articles.status", 1)
+                            ->where('article_categories.category_id', $author->id)
+                            ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                            ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                            ->orderBy('articles.date_publish', 'desc')
+                            ->paginate(10);
+            
+                        }
+
+                        
+    
+                        return $this->sendResponse(['slug' => $slug, 'author' => $author->name ,'articleCount' => $articleCount, 'articlePublishCount' => $articlePublishCount, 'articleNotPublishCount' => $articleNotPublishCount, 'articlePublish' => $articlePublish, 'status' => 200], 'Liste des articles publiés');
+                    }
+                }
+            }
+        }
+                
+    }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function notPublish($slug)
+    {
+        $categoryCount = Category::where('visible', 1)->count();
+
+        $author = Category::where('slug', $slug)->where('visible', 1)->first();
+
+        if ($author == null) {
+
+            return $this->sendResponse([ 'slug' => $slug, 'author' => 0, 'articleCount' => 0, 'articlePublishCount' => 0, 'articleNotPublishCount' => 0,'status' => 404], 'Cette catégorie n\'existe pas');
+       
+        } else {
+
+            if ($categoryCount == 0) {
+
+                return $this->sendResponse([ 'slug' => $slug,'author' => $author->name,'articleCount' => 0, 'articlePublishCount' => 0, 'articleNotPublishCount' => 0, 'status' => 401], 'Aucune catégorie n\'est enregistrée.');
+    
+            } else {
+    
+                $articleCount = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                ->where("articles.visible", 1)
+                ->where('article_categories.category_id', $author->id)
+                ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->count();
+    
+                $articlePublishCount = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                ->where("articles.visible", 1)
+                ->where("articles.status", 1)
+                ->where('article_categories.category_id', $author->id)
+                ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->count();
+    
+                $articleNotPublishCount = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                ->where("articles.visible", 1)
+                ->where("articles.status", 0)
+                ->where('article_categories.category_id', $author->id)
+                ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                ->count();
+    
+                if ($articleCount == 0) {
+        
+                    return $this->sendResponse(['slug' => $slug,'author' => $author->name,'articleCount' => $articleCount, 'articlePublishCount' => $articlePublishCount, 'articleNotPublishCount' => $articleNotPublishCount,'status' => 401 ], 'Aucun article de cette catégorie n\'est enregistré.');
+        
+                }else{
+                   
+                    if ($articleNotPublishCount == 0) {
+            
+                        return $this->sendResponse(['slug' => $slug,'author' => $author->name,'articleCount' => $articleCount, 'articlePublishCount' => $articlePublishCount, 'articleNotPublishCount' => $articleNotPublishCount, 'status' => 401], 'Aucun brouillon de cette catégorie n\'est enregistré.');
+            
+                    }else{
+    
+                        if(request('search')){
+
+                            $articlePublish = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                            ->where("articles.visible", 1)
+                            ->where("articles.status", 0)
+                            ->where('articles.title', 'like', '%'. request('search') . '%')
+                            ->orWhere('articles.slug', 'like', '%'. request('search') . '%')
+                            ->orWhere('articles.date_publish', 'like', '%'. request('search') . '%')
+                            ->orWhere('categories.name', 'like', '%'. request('search') . '%')
+                            ->where('article_categories.category_id', $author->id)
+                            ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                            ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                            ->orderBy('articles.date_publish', 'desc')
+                            ->paginate(10);
+            
+                        }else{
+            
+                            $articlePublish = DB::table("articles") ->select(array("articles.id", "articles.title", "articles.slug" , "articles.visible" ,"articles.status"  , "articles.date_publish", "article_categories.category_id", "categories.name as categoryName" ))
+                            ->where("articles.visible", 1)
+                            ->where("articles.status", 0)
+                            ->where('article_categories.category_id', $author->id)
+                            ->leftJoin("article_categories", "article_categories.id", "=", "articles.id")
+                            ->leftJoin("categories", "categories.id", "=", "article_categories.category_id")
+                            ->orderBy('articles.date_publish', 'desc')
+                            ->paginate(10);
+            
+                        }
+    
+                        return $this->sendResponse(['slug' => $slug, 'author' => $author->name ,'articleCount' => $articleCount, 'articlePublishCount' => $articlePublishCount, 'articleNotPublishCount' => $articleNotPublishCount, 'articlePublish' => $articlePublish, 'status' => 200], 'Liste des articles publiés');
+                    }
+                }
+            }
+        }
+                
+    }
 }
