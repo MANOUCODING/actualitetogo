@@ -1,0 +1,1 @@
+Téléchargez notre application et recevez les dernières alertes d'actualité et les derniers titres et articles quotidiens près de chez vous.

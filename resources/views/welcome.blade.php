@@ -129,7 +129,9 @@ Main hero START -->
 				</div>
 			</div>
 			<!-- Slider END -->
+
 			<div class="col-lg-5 mt-5 mt-lg-0">
+				<br>
 				<!-- Card item START -->
 				<div class="card mb-4">
 					<div class="row g-3">
