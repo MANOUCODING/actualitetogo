@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\api\backoffice\admin\DashboardController;
+use App\Http\Controllers\api\backoffice\publicateur\DashboardController as PublicateurDashboardController;
 use App\Http\Controllers\api\frontoffice\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,33 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'homePosts']);
 
-Route::get('/{slug}', [HomeController::class, 'category']);
 
-Route::get('/auteurs/{slug}', [HomeController::class, 'authors']);
 
-Route::get('/tags/{slug}', [HomeController::class, 'tags']);
 
-Route::view('/admin/dashboard', 'backoffice');
 
-Route::view('/admin/newsletters', 'backoffice');
-
-Route::view('/admin/category', 'backoffice');
-
-Route::view('/admin/category/{slug}/articles', 'backoffice');
-
-Route::view('/admin/category/{slug}/articles/publish', 'backoffice');
-
-Route::view('/admin/category/{slug}/articles/not/publish', 'backoffice');
-
-Route::view('/admin/tags', 'backoffice');
-
-Route::view('/admin/tags/{slug}/articles', 'backoffice');
-
-Route::view('/admin/tags/{slug}/articles/publish', 'backoffice');
-
-Route::view('/admin/tags/{slug}/articles/not/publish', 'backoffice');
-
-Route::view('/authors/dashboard', 'backoffice');
-   
 
 

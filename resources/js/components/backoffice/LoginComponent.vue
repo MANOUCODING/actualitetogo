@@ -1,89 +1,87 @@
 <template>
-    <div class="bg-gradient-success">
+    <!-- **************** MAIN CONTENT START **************** -->
+<main>
+    <!-- =======================Inner intro START -->
+    <section>
         <div class="container">
-
-            <!-- Outer Row -->
-            <div class="row justify-content-center">
-    
-                <div class="col-xl-10 col-lg-12 col-md-9">
-    
-                    <div class="card o-hidden border-0 shadow-lg my-5">
-                        <div class="card-body p-0">
-                            <!-- Nested Row within Card Body -->
-                            <div class="row">
-                                <div class="col-lg-6 d-none d-lg-block ">
-                                    <img src="/assets/admin/img/banniereactualitetogo.jpg" style="background-position: center;
-                                    background-size: cover; width: 470px; height: 571px; object-fit: cover" alt="">
-                                </div>
-                                <div class="col-lg-6">
-                                    <br><br>
-                                    <div class="p-5">
-                                        <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">Page de connexion</h1>
-                                            <div class="alert alert-danger" v-if="error" role="alert">
-                                                {{ error }}
-                                              </div>
-                                        </div>
-                                        <form class="user">
-                                            <div class="form-group" v-if="errors.username">
-                                                <input type="text" class="form-control form-control-user is-invalid"
-                                                    id="exampleInputEmail" aria-describedby="emailHelp"
-                                                   v-model="username"  placeholder="Votre nom d'utilisateur ou email">
-                                                   <div id="exampleInputEmail" v-for="errorUsername in errors.username" :key="errorUsername" class="invalid-feedback">
-                                                        {{ errorUsername }}
-                                                  </div>
-                                            </div>
-                                            <div class="form-group" v-else>
-                                                <input type="text" class="form-control form-control-user"
-                                                    id="exampleInputEmail" aria-describedby="emailHelp"
-                                                   v-model="username"  placeholder="Votre nom d'utilisateur ou email">
-                                            </div>
-                                            <div class="form-group" v-if="errors.password">
-                                                <input type="password" class="form-control form-control-user is-invalid"
-                                                   v-model="password" id="exampleInputPassword" placeholder="Mot de passe">
-                                                <div id="exampleInputEmail" v-for="errorPassword in errors.password" :key="errorPassword" class="invalid-feedback">
-                                                    {{ errorPassword }}
-                                              </div>
-                                            </div>
-                                            <div class="form-group" v-else>
-                                                <input type="password" class="form-control form-control-user" v-model="password" id="exampleInputPassword" placeholder="Mot de passe">   
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox small">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                    <label class="custom-control-label" for="customCheck">Se souvenir de moi</label>
-                                                </div>
-                                            </div>
-                                            <button type="button" v-if="loading" class="btn btn-primary btn-user btn-block">
-                                                <i  style="color: #fff" class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
-                                                <span class="sr-only">Loading...</span>  Connexion en cours ...
-                                               
-                                            </button>
-                                            <button type="submit" @click.prevent="submitLogin" v-else class="btn btn-primary btn-user btn-block">
-                                                Se connecter
-                                            </button>
-                                            
-                                        </form>
-                                        <hr>
-                                        <div class="text-center">
-                                            
-                                            <a class="small" href="#">Mot de passe oublié?</a>
-                                        </div>
-                                        
-                                    </div>
-                                    <br>
-                                </div>
+            <div class="row">
+                <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
+                    <div class="p-4 p-sm-5 bg-primary bg-opacity-10 rounded">
+                        <h2>Page de connexion</h2>
+                        <!-- Form START -->
+                        <div v-if="error">
+                            <br>
+                            <div class="alert alert-danger"  role="alert">
+                                {{ error }}
                             </div>
                         </div>
+                        <form class="mt-4">
+                            <!-- Email -->
+                            <div class="mb-3" v-if="errors.username">
+                                <label class="form-label" for="exampleInputEmail1">Nom d'utilisateur ou votre email</label>
+                                <input type="text" v-model="username" name="username" class="form-control is-invalid" id="exampleInputEmail1" placeholder="Votre nom d'utilisateur ou votre email">
+                                <div id="exampleInputEmail1" v-for="errorUsername in errors.username" :key="errorUsername" class="invalid-feedback">
+                                    {{ errorUsername }}
+                                </div>
+                            </div>
+                            <div class="mb-3" v-else>
+                                <label class="form-label" for="exampleInputEmail1">Nom d'utilisateur ou votre email</label>
+                                <input type="text" v-model="username" name="username" class="form-control" id="exampleInputEmail1" placeholder="Votre nom d'utilisateur ou votre email">
+                            </div>
+                            <!-- Password -->
+                            <div class="mb-3" v-if="errors.password">
+                                <label class="form-label" for="exampleInputPassword1">Mot de passe</label>
+                                <input type="password"  v-model="password" name="password" class="form-control is-invalid" id="exampleInputPassword1" placeholder="*********">
+                                <div id="exampleInputPassword1" v-for="errorPassword in errors.password" :key="errorPassword" class="invalid-feedback">
+                                    {{ errorPassword }}
+                                </div>
+                            </div>
+                            <div class="mb-3" v-else>
+                                <label class="form-label" for="exampleInputPassword1">Mot de passe</label>
+                                <input type="password"  v-model="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="*********">
+                            </div>
+                            <!-- Checkbox -->
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
+                            </div>
+                            <!-- Button -->
+                            <div class="row align-items-center">
+                                <div class="col-sm-6">
+                                    <button type="button" v-if="loading" class="btn btn-success"> <i  style="color: #fff" class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+                                        <span class="sr-only">Loading...</span>  Connexion en cours ...</button>
+                                    <button type="submit"  @click.prevent="submitLogin" v-else class="btn btn-success">Se connecter</button>
+                                </div>
+                                
+                            </div>
+                        </form>
+                        <!-- Form END -->
+                        <hr>
+                        
+                        <!-- Social-media btn -->
+                        <div class="text-center">
+                            <p>Visitez nos pages sur les différents réseaux sociaux</p>
+                            <ul class="list-unstyled d-sm-flex mt-3 justify-content-center">
+                                <li class="mx-2">
+                                    <a href="https://www.facebook.com/Togoactualite-148480121847124" class="btn bg-facebook d-inline-block"><i class="fab fa-facebook-f me-2"></i> &nbsp; Facebook</a>
+                                </li>
+                                <li class="mx-2">
+                                    <a href="https://twitter.com/Togoactualite" class="btn bg-twitter d-inline-block"><i class="fab fa-twitter-square"></i> &nbsp; Twitter</a>
+                                </li>
+                                <li class="mx-2">
+                                    <a href="https://fr.linkedin.com/in/togoactualite-togo-actualit%C3%A9-3a076648" class="btn bg-linkedin d-inline-block"><i class="fab fa-linkedin"></i> &nbsp; Linkedin</a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
-    
                 </div>
-    
             </div>
-    
         </div>
-    
-    </div>
+    </section>
+    <!-- =======================Inner intro END -->    
+</main>
+    <!-- **************** MAIN CONTENT END **************** -->
 </template>
 <script>
 import store from '../../store/index'
@@ -122,11 +120,11 @@ import store from '../../store/index'
 
                         if(response.data.user.role_name == "admin"){
 
-                            this.$router.push({ name: 'admins.dashboard' })
+                           window.location = '/admin/dashboard'
 
                         }else{
 
-                            this.$router.push({ name: 'authors.dashboard' })
+                            window.location = '/publicateur/dashboard'
 
                         }
 

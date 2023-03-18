@@ -10,23 +10,9 @@ import VueSweetalert2 from 'vue-sweetalert2';
 
 import 'sweetalert2/dist/sweetalert2.min.css';
 
-// Importer le composant backoffice
+// Importer les composant backoffice
 
-import backofficeH from './components/backoffice/backoffice.vue'
-
-import backOfficeRouter from './router/backoffice'
-
-//Importer les composants layouts bacoffice
-
-import topbar from './components/backoffice/includes/topbar.vue'
-
-import sidebar from './components/backoffice/includes/sidebar.vue'
-
-import sidebarAuthor from './components/backoffice/includes/sidebarAuthor.vue'
-
-import footerbar from './components/backoffice/includes/footerbar.vue'
-
-
+import loginH from './components/backoffice/LoginComponent.vue';
 
 // Importer les composants frontoffice
 
@@ -44,25 +30,13 @@ import aNePasManquerB from './components/frontoffice/aNePasManquer.vue'
 
 import allActualiteB from './components/frontoffice/allActualite.vue'
 
-//Integrer le composant backoffice
+//Integrer les composants backoffice
 
-const backoffice = createApp(backofficeH)
+const login = createApp(loginH)
 
-backoffice.use(VueAxios, axios)
+login.use(VueAxios, axios)
 
-backoffice.use(backOfficeRouter)
-
-backoffice.use(VueSweetalert2);
-
-backoffice.component('topbar', topbar)
-
-backoffice.component('sidebar', sidebar)
-
-backoffice.component('sidebarAuthor', sidebarAuthor)
-
-backoffice.component('footerbar', footerbar)
-
-backoffice.mount('#backoffice')
+login.mount('#login')
 
 //Integrer les composants frontoffice
 
