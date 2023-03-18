@@ -55,23 +55,23 @@ class HomeController extends BaseController
 
         if ($slug == 'about') {
 
-            return view('about');
+            return view('frontoffice.about');
            
         } elseif ($slug == 'publicites') {
 
-            return view('publicites');
+            return view('frontoffice.publicites');
 
         }elseif ($slug == 'forum') {
 
-            return view('forum');
+            return view('frontoffice.forum');
 
         }elseif ($slug == 'contact') {
 
-            return view('contact');
+            return view('frontoffice.contact');
 
         }elseif ($slug == 'infos-pratiques') {
 
-            return view('infosPratiques');
+            return view('frontoffice.infosPratiques');
 
         }elseif ($slug == 'login') {
 
@@ -85,7 +85,7 @@ class HomeController extends BaseController
 
         if (($author == null) && ( $article == null)) {
 
-            return view('layouts.404');
+            return view('layouts.frontoffice.404');
        
         } elseif(($author !== null) && ( $article == null)) {
 
@@ -100,7 +100,7 @@ class HomeController extends BaseController
             ->orderBy('articles.date_publish', 'desc')
             ->paginate(9);
 
-            return view('category', ['articles' => $articles, 'category' => $author]);
+            return view('frontoffice.category', ['articles' => $articles, 'category' => $author]);
            
     
         }else{
@@ -181,7 +181,7 @@ class HomeController extends BaseController
 
             }
 
-            return view('article',[
+            return view('frontoffice.article',[
                 'article' => $article, 
                 'categories' => $categories, 
                 'files' => $files, 
@@ -207,7 +207,7 @@ class HomeController extends BaseController
 
         if ($author == null) {
 
-            return view('layouts.404');
+            return view('layouts.frontoffice.404');
        
         } else {
 
@@ -223,7 +223,7 @@ class HomeController extends BaseController
             ->orderBy('articles.date_publish', 'desc')
             ->paginate(9);
 
-            return view('tags', ['articles' => $articles, 'category' => $author]);
+            return view('frontoffice.tags', ['articles' => $articles, 'category' => $author]);
            
     
         }
@@ -443,7 +443,7 @@ class HomeController extends BaseController
 
         if ($author == null) {
 
-            return view('layouts.404');
+            return view('layouts.frontoffice.404');
        
         } else {
 
@@ -459,7 +459,7 @@ class HomeController extends BaseController
                 ->orderBy('articles.date_publish', 'desc')
                 ->paginate(9);
 
-                return view('authors', ['articles' => $articles, 'category' => $author]);
+                return view('frontoffice.authors', ['articles' => $articles, 'category' => $author]);
 
            
     

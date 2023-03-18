@@ -1,11 +1,11 @@
-<footer class="bg-success pt-2"  >
+<footer class="bg-success pt-2" style="background: #006633" >
                             
 <div class="container">
 
     <div class="row pt-3">
         <div class="col-md-3 mt-4">
             <a class="navbar-brand" href="/">
-                <img class="navbar-brand-item light-mode-item" src="/assets/admin/img/blanc.png" style="width: 200px; height: 65px" alt="logo" />
+                <img class="navbar-brand-item light-mode-item" src="/assets/images/blanc.png" style="width: 200px; height: 65px" alt="logo" />
             </a>
         </div>
         <div class="col-md-3 mt-4">

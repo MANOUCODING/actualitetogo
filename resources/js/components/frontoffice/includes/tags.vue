@@ -39,7 +39,7 @@ export default {
         },
 
         tag(slug){
-            window.location = '/tags/' + slug
+            window.location = '/'
         }
 
     },
