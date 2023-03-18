@@ -54,7 +54,7 @@
 
 <!-- =======================
 Header START -->
-<header>
+<header ">
 	<div class="navbar-top d-none d-lg-block small">
 		<div class="container">
 			<div class="d-md-flex justify-content-between align-items-center my-2">
@@ -125,16 +125,16 @@ Header START -->
 		<div class="container">
 			<div class="d-sm-flex justify-content-sm-between align-items-sm-center my-2">
 				<!-- Logo START -->
-				<a class="navbar-brand d-block" href="/">
-					<img class="navbar-brand-item light-mode-item" src="/assets/images/logo.png" style="width: 200px; height: 65px;" alt="logo">
+				<a class="navbar-brand d-block" href="index.html">
+					<img class="navbar-brand-item light-mode-item" src="/assets/images/logo.svg" alt="logo" style="height: 46px;">
+					<img class="navbar-brand-item dark-mode-item" src="/assets/images/logo-light.svg" alt="logo" style="height: 46px;">
 				</a>
 				<!-- Logo END -->
 				<!-- Adv -->
 				<div>
-					<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5594963864359932" data-ad-slot="3901935961" data-ad-format="auto" data-full-width-responsive="true"></ins>
-					<script>
-						(adsbygoogle = window.adsbygoogle || []).push({});
-					</script>
+					<a href="#" class="card-img-flash d-block">
+						<img src="/assets/images/adv-2.png" alt="adv">
+					</a>
 				</div>
 			</div>
 		</div>
