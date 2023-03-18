@@ -126,8 +126,7 @@ Header START -->
 			<div class="d-sm-flex justify-content-sm-between align-items-sm-center my-2">
 				<!-- Logo START -->
 				<a class="navbar-brand d-block" href="index.html">
-					<img class="navbar-brand-item light-mode-item" src="/assets/images/logo.svg" alt="logo" style="height: 46px;">
-					<img class="navbar-brand-item dark-mode-item" src="/assets/images/logo-light.svg" alt="logo" style="height: 46px;">
+					<img class="navbar-brand-item light-mode-item" src="/assets/images/logo.png" alt="logo" style="height: 65px;">
 				</a>
 				<!-- Logo END -->
 				<!-- Adv -->
