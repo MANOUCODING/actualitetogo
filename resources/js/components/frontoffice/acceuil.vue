@@ -23,7 +23,7 @@
                             <div v-else-if="loadImportant == 2">
                                 <div class="row">
                                     
-                                    <div class="col-sm-6 col-lg-3" v-for="result in important" :key="result.id">
+                                    <div class="col-sm-12 col-lg-3" v-for="result in important" :key="result.id">
                                         <div class="card bg-transparent">
                                             <!-- Card img -->
                                             <img class="card-img rounded" :src='getImage(result.ogImage)' alt="" style="height: 200px; object-fit: cover">
@@ -57,7 +57,7 @@
                             <div v-else>
                                 <div className="card" >
                                     <div className="row">
-                                        <div class="col-sm-6 col-lg-3" v-for="result in societe"  :key="result.id">
+                                        <div class="col-sm-12 col-lg-3" v-for="result in societe"  :key="result.id">
                                             <div class="card bg-transparent">
                                                 <!-- Card img -->
                                                 <img class="card-img rounded" :src='getImage(result.ogImage)' alt="" style="height: 200px; object-fit: cover">
@@ -74,7 +74,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <br/>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                             <div v-else>
                                 <div className="card" >
                                     <div className="row">
-                                        <div class="col-sm-6 col-lg-3" v-for="result in sports" :key="result.id">
+                                        <div class="col-sm-12 col-lg-3" v-for="result in sports" :key="result.id">
                                             <div class="card bg-transparent">
                                                 <!-- Card img -->
                                                 <img class="card-img rounded" :src='getImage(result.ogImage)' alt="" style="height: 200px; object-fit: cover">
@@ -105,7 +105,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <br/>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                             <div v-else>
                                 <div className="card" >
                                     <div className="row">
-                                        <div class="col-sm-6 col-lg-3" v-for="result in opinion" :key="result.id">
+                                        <div class="col-sm-12 col-lg-3" v-for="result in opinion" :key="result.id">
                                             <div class="card bg-transparent">
                                                 <!-- Card img -->
                                                 <img class="card-img rounded" :src='getImage(result.ogImage)' alt="" style="height: 200px; object-fit: cover">
@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <br/>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                             <div v-else>
                                 <div className="card">
                                     <div className="row">
-                                        <div class="col-sm-6 col-lg-3"  v-for="result in faitsDivers" :key="result.id">
+                                        <div class="col-sm-12 col-lg-3"  v-for="result in faitsDivers" :key="result.id">
                                             <div class="card bg-transparent">
                                                 <!-- Card img -->
                                                 <img class="card-img rounded" :src='getImage(result.ogImage)' alt="" style="height: 200px; object-fit: cover">
@@ -167,7 +167,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <br/>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -181,7 +181,7 @@
                             <div v-else>
                                 <div className="card" >
                                     <div className="row">
-                                        <div class="col-sm-6 col-lg-3" v-for="result in fenetres" :key="result.id">
+                                        <div class="col-sm-12 col-lg-3" v-for="result in fenetres" :key="result.id">
                                             <div class="card bg-transparent">
                                                 <!-- Card img -->
                                                 <img class="card-img rounded" :src='getImage(result.ogImage)' alt="" style="height: 200px; object-fit: cover">
@@ -198,7 +198,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <br/>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -207,7 +207,7 @@
             </div>
         </div>
     </section>
-    <br/>
+    
     
 </template>
 

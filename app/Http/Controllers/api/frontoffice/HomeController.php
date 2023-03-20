@@ -12,6 +12,7 @@ use App\Models\NewsLetter;
 use App\Models\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class HomeController extends BaseController
 {
@@ -52,30 +53,31 @@ class HomeController extends BaseController
      */
     public function category($slug)
     {
+        $categories = Category::where('visible', 1)->get();
 
         if ($slug == 'about') {
 
-            return view('frontoffice.about');
+            return view('frontoffice.about', ['categories' => $categories]);
            
         } elseif ($slug == 'publicites') {
 
-            return view('frontoffice.publicites');
+            return view('frontoffice.publicites', ['categories' => $categories]);
 
         }elseif ($slug == 'forum') {
 
-            return view('frontoffice.forum');
+            return view('frontoffice.forum', ['categories' => $categories]);
 
         }elseif ($slug == 'contact') {
 
-            return view('frontoffice.contact');
+            return view('frontoffice.contact', ['categories' => $categories]);
 
         }elseif ($slug == 'infos-pratiques') {
 
-            return view('frontoffice.infosPratiques');
+            return view('frontoffice.infosPratiques', ['categories' => $categories]);
 
         }elseif ($slug == 'login') {
 
-            return view('backoffice.login');
+            return view('backoffice.login', ['categories' => $categories]);
 
         }else{
 
@@ -100,7 +102,7 @@ class HomeController extends BaseController
             ->orderBy('articles.date_publish', 'desc')
             ->paginate(9);
 
-            return view('frontoffice.category', ['articles' => $articles, 'category' => $author]);
+            return view('frontoffice.category', ['articles' => $articles, 'category' => $author, 'categories' => $categories]);
            
     
         }else{
@@ -189,7 +191,8 @@ class HomeController extends BaseController
                 'tagsCount' => $tagsCount, 
                 'previous' => $previous, 
                 'next' => $next,
-                'similars' => $similars
+                'similars' => $similars,
+                'categories' => $categories
                 ]);
 
 
@@ -233,22 +236,22 @@ class HomeController extends BaseController
     public function homePosts()
     {
 
-        $articlesAlaUne = Article::select(array("articles.id", "articles.title", "articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        $articlesAlaUne = Article::select(array("articles.id", "articles.title", "articles.content" ,"articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
         ->where("articles.visible", 1)
         ->where("articles.status", 1)
         ->orderBy('articles.date_publish', 'desc')
-        ->take(8)
+        ->take(13)
         ->get();
 
-        $politique = Article::select(array("articles.id", "articles.title", "articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        $politique = Article::select(array("articles.id", "articles.title", "articles.content", "articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
         ->where("articles.visible", 1)
         ->where("articles.status", 1)
         ->where("articles.categorySlug", 'politique')
         ->orderBy('articles.date_publish', 'desc')
-        ->take(4)
+        ->take(14)
         ->get();
 
-        $international = Article::select(array("articles.id", "articles.title", "articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        $international = Article::select(array("articles.id", "articles.title", "articles.content" ,"articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
         ->where("articles.visible", 1)
         ->where("articles.status", 1)
         ->where("articles.categorySlug", 'international')
@@ -258,15 +261,17 @@ class HomeController extends BaseController
         ->take(10)
         ->get();
 
-        $aNePasManquer = Article::select(array("articles.id", "articles.title", "articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
+        $aNePasManquer = Article::select(array("articles.id", "articles.title", "articles.content" ,"articles.categoryName", "articles.categorySlug" ,"articles.slug", "articles.commentsCount", "articles.date_publish","articles.authorName","articles.authorSlug","articles.ogImage"))
         ->where("articles.visible", 1)
         ->where("articles.status", 1)
         ->where("articles.categorySlug", 'a-ne-pas-rater-togo')
         ->orderBy('articles.date_publish', 'desc')
         ->take(6)
         ->get();
+
+        $categories = Category::where('visible', 1)->get();
  
-        return view('welcome', ['alaUne'=> $articlesAlaUne, 'politique' => $politique, 'international' => $international, 'aNePasManquer' => $aNePasManquer]);
+        return view('welcome', ['alaUne'=> $articlesAlaUne,'categories' => $categories,  'politique' => $politique, 'international' => $international, 'aNePasManquer' => $aNePasManquer]);
 
     }
 

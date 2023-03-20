@@ -24,6 +24,8 @@
 
 	<!-- Theme CSS -->
 	<link id="style-switch" rel="stylesheet" type="text/css" href="/assets/css/style.css">
+	<link id="style-switch" rel="stylesheet" type="text/css" href="/assets/css/loader.css">
+
 </head>
 
 <body > 

@@ -6,10 +6,10 @@
             <br/><br/><br/><br/><br/><br/>
         </div>
     </div>
-    <div class="row mt-3" v-else>
+    <div class="row" v-else>
         <h5 class="mb-2 text-white">Les Tags</h5>
-        <ul class="list-inline text-primary-hover lh-lg" >
-            <li class="list-inline-item text-white" v-for="info in tags" :key="info.id" ><span @click="tag(info.slug)" style="cursor: pointer"> #{{ info.name }} </span></li>
+        <ul class="list-inline text-primary-hover lh-lg">
+            <li class="list-inline-item" v-for="info in tags" :key="info.id" ><span @click="tag(info.slug)" style="cursor: pointer"> #{{ info.name }} </span></li>
         </ul>
     </div>
 </template>

@@ -18,6 +18,8 @@
 		<div>
 			<a class="navbar-brand" href="/">
 				<img class="navbar-brand-item light-mode-item" src="/assets/images/logo.png" style="width: 200px; height: 65px;" alt="logo">
+				<img class="navbar-brand-item dark-mode-item" src="/assets/images/logo.png" style="width: 200px; height: 65px;" alt="logo">
+
 			</a> <br>
 			<p>Nous sommes Togo Actualité, l’information en temps réel sur le Togo et l’Afrique. </p>
 			<!-- Nav START -->
@@ -125,8 +127,10 @@ Header START -->
 		<div class="container">
 			<div class="d-sm-flex justify-content-sm-between align-items-sm-center my-2">
 				<!-- Logo START -->
-				<a class="navbar-brand d-block" href="index.html">
+				<a class="navbar-brand d-block" href="/">
 					<img class="navbar-brand-item light-mode-item" src="/assets/images/logo.png" alt="logo" style="height: 65px;">
+					<img class="navbar-brand-item dark-mode-item" src="/assets/images/logo.png" alt="logo" style="height: 65px;">
+
 				</a>
 				<!-- Logo END -->
 				<!-- Adv -->
