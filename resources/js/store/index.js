@@ -30,15 +30,23 @@ export default new Vuex.Store({
     },
 
     mutations: {
+        
         loginUser (state) {
+
             state.isLoggedIn = true
+
         },
+
         logoutUser (state) {
+
             state.isLoggedIn = false
+
         },
 
         setUserRole(state, role){
+
             state.user.role = role
+
         }
     }
 })

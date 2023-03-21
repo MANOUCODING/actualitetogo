@@ -88,22 +88,6 @@
 		</div>
 	</section>
 	<!-- =======================Main hero END -->
-
-	
-<!-- =======================Adv START -->
-<section class="py-3 my-2">
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<a href="#" class="d-block card-img-flash  rounded-3 overflow-hidden">
-					<img src="assets/images/adv-3.png" alt="">
-				</a>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- =======================
-Adv END -->
 	
 	<!-- =======================Main content START -->
 	<section class="position-relative">
@@ -318,41 +302,9 @@ Adv END -->
 			</div>
 		</div>
 	</section>
-
-	
-<!-- =======================
-Adv START -->
-<section class="py-3 my-2">
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<a href="#" class="d-block card-img-flash  rounded-3 overflow-hidden">
-					<img src="assets/images/adv-3.png" alt="">
-				</a>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- =======================
-Adv END -->
 	
 	<div id="acceuil"></div>
 	
-<!-- =======================
-Adv START -->
-<section class="py-3 my-2">
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<a href="#" class="d-block card-img-flash  rounded-3 overflow-hidden">
-					<img src="assets/images/adv-3.png" alt="">
-				</a>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- =======================
-Adv END -->
 	<section class="position-relative">
 		<div class="container" data-sticky-container>
 			<div class="row">
@@ -412,22 +364,7 @@ Adv END -->
 			</div>
 		</div>
 	</section>
-	
-<!-- =======================
-Adv START -->
-<section class="py-3 my-2">
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<a href="#" class="d-block card-img-flash  rounded-3 overflow-hidden">
-					<img src="assets/images/adv-3.png" alt="">
-				</a>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- =======================
-Adv END -->
+
 	<section class="py-0 card-grid">
 		<div class="container">
 			<div class="row">
@@ -454,7 +391,7 @@ Adv END -->
 												<!-- Card title -->
 												<h2 class="text-white "><a href="/{{ $result->slug }}" class="btn-link text-reset stretched-link fw-normal">{!! $result->title !!}</a></h2>
 												<div class="text-white" style="color: #fff">
-													{!! \Illuminate\Support\Str::words($result->content, 40, ' ...') !!}
+													{!! \Illuminate\Support\Str::words($result->content, 45, ' ...') !!}
 												</div>
 
 												<!-- Card info -->
@@ -480,39 +417,8 @@ Adv END -->
 			</div> <!-- Row END -->
 		</div>
 	</section>
-	
-<!-- =======================
-Adv START -->
-<section class="py-3 my-2">
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<a href="#" class="d-block card-img-flash  rounded-3 overflow-hidden">
-					<img src="assets/images/adv-3.png" alt="">
-				</a>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- =======================
-Adv END -->
-	<div id="allActualite" ></div>
 
-<!-- =======================
-Adv START -->
-<section class="py-3 my-2">
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<a href="#" class="d-block card-img-flash  rounded-3 overflow-hidden">
-					<img src="assets/images/adv-3.png" alt="">
-				</a>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- =======================
-Adv END -->
+	<div id="allActualite" ></div>
 <br>
 </main>
 @endsection

@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\api\backoffice\admin\DashboardController;
-use App\Http\Controllers\api\backoffice\publicateur\DashboardController as PublicateurDashboardController;
+use App\Http\Controllers\api\backoffice\VerifyUserRoleController;
 use App\Http\Controllers\api\frontoffice\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +22,10 @@ Route::get('/{slug}', [HomeController::class, 'category']);
 Route::get('auteurs/{slug}', [HomeController::class, 'authors']);
 
 Route::get('tags/{slug}', [HomeController::class, 'tags']);
+
+Route::get('/admin/dashboard',  [VerifyUserRoleController::class, 'adminDashboard']);
+
+Route::get('/publicateur/dashboard', [VerifyUserRoleController::class, 'publicatorDashboard']);
 
 
 

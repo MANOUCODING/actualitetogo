@@ -2,26 +2,28 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import store from '../store/index';
 
-import LoginComponent from '../components/backoffice/LoginComponent.vue';
+import DashboardAdminComponent from '../components/backoffice/admin/DashboardAdminComponent.vue';
+
+import DashboardPublicateurComponent from '../components/backoffice/publicateur/DashboardPublicateurComponent.vue';
 
 import LogoutComponent from '../components/backoffice/LogoutComponent.vue';
 
-
 const routes = [
+
     {
-        path: '/login',
-        component: LoginComponent,
-        name: 'login',
+        path: '/admin/dashboard',
+        name: 'admins.dashboard',
+        component: DashboardAdminComponent,
+        meta: { requiresAuth: true,  }  // add this
     },
-
    
-
     {
-        path: '/authors/dashboard',
-        name: 'authors.dashboard',
-        component: AuthorsDashboardComponent,
+        path: '/publicateur/dashboard',
+        name: 'publicateurs.dashboard',
+        component: DashboardPublicateurComponent,
         meta: { requiresAuth: true }  // add this
     },
+
     {
         path: '/logout',
         component: LogoutComponent,

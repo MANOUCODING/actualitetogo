@@ -107,7 +107,9 @@ class HomeController extends BaseController
     
         }else{
 
-            $categories = Article::select(array("categories.name", "categories.slug"))
+            $categories = Category::where('visible', 1)->get();
+
+            $categoriesH = Article::select(array("categories.name", "categories.slug"))
             ->where("articles.visible", 1)
             ->where("articles.id", $article->id)
             ->leftJoin("article_categories", "article_categories.article_id", "=", "articles.id")
@@ -192,7 +194,7 @@ class HomeController extends BaseController
                 'previous' => $previous, 
                 'next' => $next,
                 'similars' => $similars,
-                'categories' => $categories
+                'categoriesH' => $categoriesH
                 ]);
 
 
