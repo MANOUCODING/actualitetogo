@@ -15,17 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'homePosts']);
-
-Route::get('/{slug}', [HomeController::class, 'category']);
-
-Route::get('auteurs/{slug}', [HomeController::class, 'authors']);
-
-Route::get('tags/{slug}', [HomeController::class, 'tags']);
-
-Route::get('/admin/dashboard',  [VerifyUserRoleController::class, 'adminDashboard']);
-
-Route::get('/publicateur/dashboard', [VerifyUserRoleController::class, 'publicatorDashboard']);
+Route::get('/', [HomeController::class, 'home']);
 
 
 

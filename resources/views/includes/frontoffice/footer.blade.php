@@ -1,6 +1,4 @@
-
-<!-- =======================
-Footer START -->
+<!-- =======================Footer START -->
 <footer class="bg-dark pt-5">
 	<div class="container">
 		<!-- About and Newsletter START -->
@@ -114,5 +112,7 @@ Footer START -->
 	</div>
 	<!-- Footer copyright END -->
 </footer>
-<!-- =======================
-Footer END -->
+<!-- =======================Footer END -->
+
+<!-- Back to top -->
+<div class="back-top"><i class="bi bi-arrow-up-short"></i></div>

@@ -14,7 +14,7 @@
         <div class="col-12">
             <button type="submit"  class="btn btn-danger m-0" v-if="!loading">S' abonner</button>
             <button type="button"  class="btn btn-danger m-0" v-else> 
-                <i  style="color: #fff" class="fa fa-spinner fa-spin fa-fw"></i>
+                <i  style="color: #fff" class="fa fa-spinner fa-1x fa-spin fa-fw"></i>
                 <span class="sr-only">Loading...</span>
             </button>
         </div>
@@ -40,7 +40,7 @@ export default{
         store(){
             this.loading = true
            
-            axios.post('/api/newsletter/store',{
+            axios.post('/api/home/newsletter/store',{
                 email : this.data.email,
             })
             .then(response =>{
