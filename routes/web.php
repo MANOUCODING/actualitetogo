@@ -15,8 +15,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'home']);
+Route::get('/', [HomeController::class, 'homePosts']);
 
+//Route pour le composant du frontoffice
+
+Route::get('/{slug}', [HomeController::class, 'category']);
+
+Route::get('/auteurs/{slug}', [HomeController::class, 'authors']);
+
+Route::get('/tags/{slug}', [HomeController::class, 'tags']);
+
+//Routes pour les composants backoffice
+
+Route::view('/admin/dashboard', 'includes.backoffice.backoffice');
+
+Route::view('/admin/categories', 'includes.backoffice.backoffice');
+
+Route::view('/publicateur/dashboard', 'includes.backoffice.backoffice');
 
 
 
